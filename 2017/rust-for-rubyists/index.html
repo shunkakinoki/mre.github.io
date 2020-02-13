@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <style>
+      html,body,div,form,fieldset,legend,label,h1,h2{margin:0;padding:0}html,body{height:100%}body{font-family:Georgia, Times, serif;font-size:120%;line-height:1.58;border-top:0.5em solid #c35}.container{display:flex;flex-direction:column;margin:0px auto;margin-top:10px}header{font-size:0.8em;text-align:center}.bio{width:210px;margin:auto;padding:16px}main{padding:20px;margin-bottom:50px;max-width:650px}figure a{border:none}figure a:hover{border:none}nav a,nav a:hover{border-bottom:none}main article{margin-bottom:44px}main img{max-width:100%}main video{max-width:100%}.homepage h1{font-size:130%}@media screen and (max-width: 640px){body{font-size:110%}}@media screen and (min-width: 800px){.container{flex-direction:row;justify-content:center;margin-top:70px}main{padding:0px 30px}.bio span:after{content:"Writes about Rust, low-level computing, and microwave clocks."}}h1,h2,h3,h4,h5,h6,th,td,caption{font-weight:400}.post-meta{font-style:italic;margin:0px;font-size:90%}.homepage .post-meta{font-size:80%}.post-links{list-style:none;padding:24px 0 0 0;margin-top:40px;border-top:solid 1px #555}code{background:#fafafa;border-radius:6px;display:inline-block;font-family:"Courier New", "Courier", monospace;-moz-font-feature-settings:"liga" off;font-feature-settings:"liga" off;font-size:16px;-moz-osx-font-smoothing:auto;-webkit-font-smoothing:subpixel-antialiased;max-width:100%;overflow-x:auto;padding:0 5px;vertical-align:middle;word-wrap:normal;box-shadow:0 1px 1px rgba(0,0,0,0.125)}blockquote{border-left:4px solid #9fd6fa;font-style:italic;margin:4px 10px;padding:3px 20px}pre{padding:10px;border-radius:6px;overflow-x:auto;box-shadow:0 1px 1px rgba(0,0,0,0.125)}h1{font-size:1.87em;margin-bottom:8px}h2{font-size:1.2em}h3{margin-top:0px;font-style:italic}::selection{background:black;color:white}a{color:#c35;text-decoration:none;border-bottom:1px dashed #c35}a:hover{border-bottom:2px solid #c35}header nav ul{display:inline-block;padding-left:0px;margin-top:0}header nav li{list-style:none;display:inline}.icon{height:24px;width:24px;opacity:0.4;float:left;margin:5px;background-repeat:no-repeat}.icon:hover{opacity:1;transition:opacity 200ms ease-in}.button{background-color:#c35;padding:10px;color:white}figure{font-size:0.9em;font-style:italic;margin:40px 0 40px;padding:0;text-align:center;text-indent:0}figure img{width:100%}figcaption{margin-top:10px}.comments{list-style:none;display:inline}#teaser{background:#c35;color:#f5b2c8}#teaser a,footer a{color:white;border-bottom:2px solid #c35}#teaser a::after{content:"\a0»"}footer{background:#234;color:#b9b9b9}#teaser,footer{display:flex;justify-content:center}#teaser .body,footer .body{max-width:800px;margin:40px auto;padding:20px}.email{background-color:white}.submit{background-color:#b9b9b9}footer .field{padding:10px;font-size:0.8em;border:none}.autocomplete{position:relative;display:inline-block}.autocomplete input{border:1px solid #ddd;padding:10px 20px;border-radius:20px;width:150px;font-size:0.9em;box-shadow:0 1px 0px rgba(255,255,255,0.25)}input[type="submit"]{cursor:pointer}input:focus::placeholder{color:transparent}.autocomplete-items{position:absolute;left:0;top:38px;font-size:0.9em;line-height:1.5;width:100%}.autocomplete-items div{padding:10px;cursor:pointer;background-color:white;border:1px solid #ddd}.autocomplete-items div:hover,.autocomplete-active{background-color:#c35 !important;color:white}@media not screen and (max-width: 800px){.searchicon{display:none}}@media screen and (max-width: 800px){#searchbox{display:none}#searchbox:target{display:block}.autocomplete{width:100%;font-size:1.1em}.autocomplete input{width:calc(100% - 100px);margin:20px 10px}.autocomplete-items{top:58px}}.info{padding:20px;margin:30px 0;background-color:lightyellow;border:4px solid peachpuff;position:relative;border-radius:6px}.logo_font{position:relative;width:175px;height:34px;margin:0 auto}.logo_font svg{position:absolute;top:0;left:0}@media (prefers-color-scheme: light){.logo_font_dark{display:none}}@media (prefers-color-scheme: dark){.logo_font_light{display:none}}@media (prefers-color-scheme: dark){body{background:#234;color:white;border-top:0.5em solid #ff1c76}.bio,.post-meta{color:#b9b9b9}.post-links{border-top:solid 1px white}a{color:#ff1c76;border-bottom:1px dashed #ff1c76}a:hover{border-bottom:2px solid #ff1c76}.icon{filter:brightness(0) invert(1)}main img{background-color:white;border-radius:6px}code{background-color:#111}pre{background-color:#fff;-webkit-filter:invert(100%);filter:invert(100%)}.info{background:#141f2b;border-color:#555}.autocomplete input,.autocomplete-items div{border:0;background:#141f2b;color:white}footer{background:#141f2b}}
+
+    </style>
+<title>Rust for Rubyists | Matthias Endler</title>
+<link rel="canonical" href="https://endler.dev/2017/rust-for-rubyists/">
+<link rel="stylesheet" href="./article.css" />
+
+<meta property="og:title" content="Rust for Rubyists | Matthias Endler" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="Recently I came across a delightful article on …" />
+<meta property="og:url" content="https://endler.dev/2017/rust-for-rubyists/" />
+<meta property="og:image" content="https://endler.dev/default.png" />
+
+<meta name="twitter:title" content="Rust for Rubyists">
+<meta name="twitter:description" content="Recently I came across a delightful article on …">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@matthiasendler">
+<meta name="twitter:creator" content="@matthiasendler">
+<meta name="twitter:image" content="https://endler.dev/default.png">
+    <link rel="canonical" href="https://endler.dev/2017/rust-for-rubyists/" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png?v=m2llJQPQq8"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon-32x32.png?v=m2llJQPQq8"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon-16x16.png?v=m2llJQPQq8"
+    />
+    <link
+      rel="mask-icon"
+      href="/safari-pinned-tab.svg?v=m2llJQPQq8"
+      color="#5bbad5"
+    />
+    <link rel="shortcut icon" href="/favicon.ico?v=m2llJQPQq8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="author" content="Matthias Endler" />
+    <meta
+      name="description"
+      content="Personal website of Matthias Endler, a Software Engineer interested in low-level programming and Backend development. Rust, Go"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        
+
+
+
+<a href="/" aria-label="Go back to homepage">
+  <div style="width: 110px; margin: auto;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456 456"><defs/><g letter-spacing="0" transform="translate(-167)" word-spacing="0"><circle cx="395" cy="228" r="220" fill="#fff" stroke="#000" stroke-width="16"/><path fill="#856800" fill-rule="evenodd" d="M468 266l-70 37-77-37z"/><path fill="#ffcb15" fill-rule="evenodd" d="M468 266l-70 31-77-31z"/><path d="M360 208a22 21 85 00-2 0 22 21 85 00-19 24 22 21 85 0023 19 22 21 85 0019-23 22 21 85 00-7-14 5 6 0 012 4 5 6 0 01-6 7 5 6 0 01-5-7 5 6 0 016-6 5 6 0 013 1 22 21 85 00-14-5zm71 1a22 21 85 00-2 0 22 21 85 00-19 23 22 21 85 0022 20 22 21 85 0019-24 22 21 85 00-20-19zm10 4a5 6 0 015 6 5 6 0 01-5 6 5 6 0 01-5-6 5 6 0 015-6z"/></g><path fill-rule="evenodd" d="M262 58c-4 9-12 19-19 24 1-8 2-16 1-22-4 8-12 18-20 24 2-7 2-15 1-21-7 13-15 24-29 28-70 20-131 113-152 213 11 28 29 53 51 73 8-158 45-267 112-208 10 9 16 13 20 13 5 0 10-4 21-13 67-59 105 50 112 208 22-20 40-45 51-73-20-95-77-184-144-209l-10-4c4-8 7-23 5-33z"/></svg>
+  </div>
+  <div class="logo_font">
+    <div class="logo_font_dark">
+    <svg xmlns="http://www.w3.org/2000/svg" class="logo_font_dark" viewBox="0 0 786.1 139.2"><defs/><path fill="#fff" d="M734.2.1v139h12V73.3l7.3-.3 19.2 66.2 13.4-.1L765 69.4c7.8-4.8 14.7-12 14.4-35.5C779.1 10.2 764.9.2 749.2.1zm-200 .5l-11.4.1v138h11.4v-101l28.3 101v.4h11.3V1.1h-11.2v51.8l-.1-.1V102L534.2 1V.8zm116 0v138h31.6v-10.7l-20.2.1V0h-11.4zm-171 .1v138h31.7V128h-20.2V72.3h18.8V61.7h-18.8V11.1h20.2V.4h-31.7zm109 0v138h13.9c14.8 0 24.7-7.5 29.5-22.5 2.8-8.9 4.2-24.4 4.2-46.7 0-22.2-1.4-37.8-4.2-46.6C626.8 7.9 616.9.4 602.1.4h-13.9zm103 0v138h31.7V128h-20.4V72.3h19V61.7h-19V11.1h20.3V.4h-31.6zm54 9.8c16.5 0 20.6 7.9 20.6 23.3 0 15.5-1 28-20.6 28zm-146 .9h1.2c10.5 0 17.4 6.2 20.6 18.5a176 176 0 013.1 40c0 19.2-1 32.5-3.1 39.9-3.2 12.3-10 18.5-20.6 18.5h-1.2v-117z" color="#000" style="font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal"/><path fill="#9f9f9f" d="M406.2.1a23.8 23.8 0 00-11.3 3.3 22.4 22.4 0 00-9 12.2 42 42 0 00.7 30.2 68.6 68.6 0 0011.7 18.4 2360 2360 0 019.4 11c10.6 12.3 14.7 23 13.3 34.8-1.1 8.5-4.2 14-9.7 17.3-4.1 2.4-10.3 2-15.3.2a44.7 44.7 0 01-10.9-9l-5.3 7.4a15 15 0 002.5 3.6c2.8 3.2 8 6.9 11.8 8.2l.2.3a52.7 52.7 0 0020 0c9-3.5 14.6-11.7 16.2-24 1-6.6 1-11 0-16.6-1.9-12.4-5.8-19.5-18.8-34.7-13.5-15.5-16.9-21.1-18-29.5-1.3-9.7 1.9-18 7.9-21.4 4.4-2.3 8.5-1.3 12.9.7a28 28 0 014.4 3.2l1.6 1.3c.6 0 3.9-8 4.4-8.8A23.8 23.8 0 00406.2.1zm-302 .2l-20.9 138h11.4l6-45.8H120l6 45.8h11.4L116.5.3zm78 0h-39.4v10.8h14.8v128H169v-128h28.1v128h11.4v-128h14.9V.3zm46.3 0v138H240V72h28.4v66.4h11.2V.4L268.3.3v61.5h-28.4V.3zm66.1 0v138H306V.3zm47.4 0l-21 138h11.4l5.9-45.8h19.4l5.9 45.9H375L354.2.4H342zM0 .7v138h11.4v-117c6.6 12.7 13.8 26 19.7 36.8l5.7 10 5.7-10 19.7-36.6v117h11.2V.9H62.2L40.7 40.7l-4 7.4c-9-17-17.3-32-25.4-47.2L0 .8zm110 18.7l8.5 64.3h-17zm238 0l8.4 64.4h-16.9l8.5-64.3z"/></svg>
+    </div>
+    <div class="logo_font_light">
+    <svg xmlns="http://www.w3.org/2000/svg" class="logo_font_light" viewBox="0 0 786.1 139.2"><defs/><path fill="#030303" style="font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal" d="M734.2.1v139h12V73.3l7.3-.3 19.2 66.2 13.4-.1L765 69.4c7.8-4.8 14.7-12 14.4-35.5C779.1 10.2 764.9.2 749.2.1zm-200 .5l-11.4.1v138h11.4v-101l28.3 101v.4h11.3V1.1h-11.2v51.8l-.1-.1V102L534.2 1V.8zm116 0v138h31.6v-10.7l-20.2.1V0h-11.4zm-171 .1v138h31.7V128h-20.2V72.3h18.8V61.7h-18.8V11.1h20.2V.4h-31.7zm109 0v138h13.9c14.8 0 24.7-7.5 29.5-22.5 2.8-8.9 4.2-24.4 4.2-46.7 0-22.2-1.4-37.8-4.2-46.6C626.8 7.9 616.9.4 602.1.4h-13.9zm103 0v138h31.7V128h-20.4V72.3h19V61.7h-19V11.1h20.3V.4h-31.6zm54 9.8c16.5 0 20.6 7.9 20.6 23.3 0 15.5-1 28-20.6 28zm-146 .9h1.2c10.5 0 17.4 6.2 20.6 18.5a176 176 0 013.1 40c0 19.2-1 32.5-3.1 39.9-3.2 12.3-10 18.5-20.6 18.5h-1.2v-117z" color="#000"/><path fill="#9f9f9f" d="M406.2.1a23.8 23.8 0 00-11.3 3.3 22.4 22.4 0 00-9 12.2 42 42 0 00.7 30.2 68.6 68.6 0 0011.7 18.4 2360 2360 0 019.4 11c10.6 12.3 14.7 23 13.3 34.8-1.1 8.5-4.2 14-9.7 17.3-4.1 2.4-10.3 2-15.3.2a44.7 44.7 0 01-10.9-9l-5.3 7.4a15 15 0 002.5 3.6c2.8 3.2 8 6.9 11.8 8.2l.2.3a52.7 52.7 0 0020 0c9-3.5 14.6-11.7 16.2-24 1-6.6 1-11 0-16.6-1.9-12.4-5.8-19.5-18.8-34.7-13.5-15.5-16.9-21.1-18-29.5-1.3-9.7 1.9-18 7.9-21.4 4.4-2.3 8.5-1.3 12.9.7a28 28 0 014.4 3.2l1.6 1.3c.6 0 3.9-8 4.4-8.8A23.8 23.8 0 00406.2.1zm-302 .2l-20.9 138h11.4l6-45.8H120l6 45.8h11.4L116.5.3zm78 0h-39.4v10.8h14.8v128H169v-128h28.1v128h11.4v-128h14.9V.3zm46.3 0v138H240V72h28.4v66.4h11.2V.4L268.3.3v61.5h-28.4V.3zm66.1 0v138H306V.3zm47.4 0l-21 138h11.4l5.9-45.8h19.4l5.9 45.9H375L354.2.4H342zM0 .7v138h11.4v-117c6.6 12.7 13.8 26 19.7 36.8l5.7 10 5.7-10 19.7-36.6v117h11.2V.9H62.2L40.7 40.7l-4 7.4c-9-17-17.3-32-25.4-47.2L0 .8zm110 18.7l8.5 64.3h-17zm238 0l8.4 64.4h-16.9l8.5-64.3z"/></svg>
+    </div>
+  </div>
+</a>
+
+        <p class="bio">
+          <span>
+            Backend engineer at trivago, open-source maintainer, speaker.
+          </span>
+          <a href="/about">About me.</a>
+        </p>
+        
+
+
+
+
+
+<nav>
+    <ul>
+        <li>
+            <a class="icon" href="/" title="Go to homepage" aria-label="Go to homepage">
+                <svg xmlns='http://www.w3.org/2000/svg' version='1' viewBox='0 0 61 58'><path stroke='#fff' stroke-linecap='square' stroke-width='.52916' d='M7 21v36h16V38h15v19h15V21z'/><path d='M61 26H0l15-13L30 0l15 13z'/></svg>
+            </a>
+        </li>
+        <li>
+            <a class="icon" href="https://github.com/mre" title="My Github profile" aria-label="My Github profile">
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 578.3 578.3'><path d='M533 160c1-26-5-53-10-79-1-9-5-18-8-27-2-6-10-10-16-9l-12 3c-39 13-76 32-111 54-5 3-11 4-17 3l-41-5c-33-1-67 0-100 6-5 1-11 0-15-3-38-24-77-46-122-57-7-2-14-1-15 1l-3 6c-5 16-10 33-13 51-4 20-7 42-5 62 1 13-3 21-10 30-24 31-34 66-35 104-1 33 4 65 14 97 15 48 45 84 90 108 36 19 76 27 117 28h111c37 1 73-3 109-14 35-12 66-30 90-60 34-42 45-92 47-145 2-40-6-78-30-111a65 65 0 01-15-43zm-71 310c-16 13-35 20-55 25-39 9-79 11-119 10-39 1-78-1-116-10-28-7-54-18-72-42-29-39-36-112 11-152 12-11 26-17 41-18l53-3 133 3c20 0 40-5 60-4 18 2 38 5 54 12 28 12 42 37 47 66 7 43-2 83-37 113z'/><ellipse cx='390' cy='385.6' rx='42.1' ry='56.3'/><ellipse cx='189' cy='385.6' rx='42.1' ry='56.3'/></svg>
+            </a>
+        </li>
+        <li>
+            <a class="icon" href="https://twitter.com/matthiasendler" title="My Twitter profile"
+                aria-label="My Twitter profile">
+                <svg xmlns='http://www.w3.org/2000/svg' version='1' viewBox='0 0 612 612'><path fill='#010002' d='M612 116c-23 10-47 17-72 20 26-15 46-40 55-69-24 14-51 24-80 30a125 125 0 0 0-217 86c0 10 1 19 3 29-104-6-196-56-258-132a125 125 0 0 0 39 168c-21-1-40-6-57-16v2c0 61 43 111 100 123a127 127 0 0 1-56 2c16 50 62 86 117 87A252 252 0 0 1 0 498a355 355 0 0 0 550-301l-1-16c25-17 46-40 63-65z'/></svg> 
+            </a>
+        </li>
+        <li>
+            <a class="icon" href="https://feedly.com/i/subscription/feed/https%3A%2F%2Fendler.dev%2Frss.xml" title="My RSS feed"
+                aria-label="My RSS feed"><svg xmlns='http://www.w3.org/2000/svg' version='1' viewBox='0 0 1280 1280'><path d='M264 224l-1 79v79h8a660 660 0 0 1 438 174 665 665 0 0 1 218 492h156l1-26a820 820 0 0 0-715-792c-37-5-103-9-105-6z'/><path d='M263 504l-1 78 1 79 14 2a383 383 0 0 1 369 368l1 17h158v-19a536 536 0 0 0-98-293 546 546 0 0 0-444-232zM353 830a110 110 0 0 0-77 160 110 110 0 1 0 188-114c-5-7-23-25-30-29-25-16-54-22-81-17z'/></svg></a>
+        </li>
+        <li>
+            <a class="searchicon icon" href="#searchbox" title="Search"
+                aria-label="Search through articles">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.1 90.1"><defs/><path d="M71.8 62.6a39.6 39.6 0 10-9.2 9.2L79 88.2a6.5 6.5 0 009.2-9.2zM13 39.6a26.5 26.5 0 1126.5 26.5 26.5 26.5 0 01-26.5-26.5z"/></svg>
+            </a>
+        </li>
+    </ul>
+</nav> 
+<script defer type="module">async function lazyLoad(){await init("/tinysearch_engine_bg.wasm")}var loaded=!1;function autocomplete(e){var t;function n(e){if(!e)return!1;!function(e){for(var t=0;t<e.length;t++)e[t].classList.remove("autocomplete-active")}(e),t>=e.length&&(t=0),t<0&&(t=e.length-1),e[t].classList.add("autocomplete-active")}function a(t){for(var n=document.getElementsByClassName("autocomplete-items"),a=0;a<n.length;a++)t!=n[a]&&t!=e&&n[a].parentNode.removeChild(n[a])}e.addEventListener("click",(function(e){loaded||(lazyLoad(),loaded=!0)})),e.addEventListener("input",(function(e){var n,o,i,c=this.value;if(a(),!c)return!1;t=-1,(n=document.createElement("DIV")).setAttribute("id",this.id+"autocomplete-list"),n.setAttribute("class","autocomplete-items"),this.parentNode.appendChild(n);let r=search(c,3);for(i=0;i<r.length;i++){let e=r[i];(o=document.createElement("DIV")).innerHTML=e[0],o.addEventListener("click",(function(t){window.location.href=`${e[1]}?q=${encodeURIComponent(c)}`})),n.appendChild(o)}})),e.addEventListener("keydown",(function(e){var a=document.getElementById(this.id+"autocomplete-list");a&&(a=a.getElementsByTagName("div")),40==e.keyCode?(t++,n(a)):38==e.keyCode?(t--,n(a)):13==e.keyCode&&(e.preventDefault(),t>-1&&a&&a[t].click())})),document.addEventListener("click",(function(e){a(e.target)}))}let wasm;autocomplete(document.getElementById("tinysearch"));let WASM_VECTOR_LEN=0,cachedTextEncoder=new TextEncoder("utf-8");const encodeString="function"==typeof cachedTextEncoder.encodeInto?function(e,t){return cachedTextEncoder.encodeInto(e,t)}:function(e,t){const n=cachedTextEncoder.encode(e);return t.set(n),{read:e.length,written:n.length}};let cachegetUint8Memory=null;function getUint8Memory(){return null!==cachegetUint8Memory&&cachegetUint8Memory.buffer===wasm.memory.buffer||(cachegetUint8Memory=new Uint8Array(wasm.memory.buffer)),cachegetUint8Memory}function passStringToWasm(e){let t=e.length,n=wasm.__wbindgen_malloc(t);const a=getUint8Memory();let o=0;for(;o<t;o++){const t=e.charCodeAt(o);if(t>127)break;a[n+o]=t}if(o!==t){0!==o&&(e=e.slice(o)),n=wasm.__wbindgen_realloc(n,t,t=o+3*e.length);const a=getUint8Memory().subarray(n+o,n+t);o+=encodeString(e,a).written}return WASM_VECTOR_LEN=o,n}const heap=new Array(32);function getObject(e){return heap[e]}heap.fill(void 0),heap.push(void 0,null,!0,!1);let heap_next=heap.length;function dropObject(e){e<36||(heap[e]=heap_next,heap_next=e)}function takeObject(e){const t=getObject(e);return dropObject(e),t}export function search(e,t){return takeObject(wasm.search(passStringToWasm(e),WASM_VECTOR_LEN,t))}let cachedTextDecoder=new TextDecoder("utf-8",{ignoreBOM:!0,fatal:!0});function getStringFromWasm(e,t){return cachedTextDecoder.decode(getUint8Memory().subarray(e,e+t))}function addHeapObject(e){heap_next===heap.length&&heap.push(heap.length+1);const t=heap_next;return heap_next=heap[t],heap[t]=e,t}function init(e){let t;void 0===e&&(e=import.meta.url.replace(/\.js$/,"_bg.wasm"));const n={wbg:{}};if(n.wbg.__wbindgen_json_parse=function(e,t){return addHeapObject(JSON.parse(getStringFromWasm(e,t)))},"function"==typeof URL&&e instanceof URL||"string"==typeof e||"function"==typeof Request&&e instanceof Request){const a=fetch(e);t="function"==typeof WebAssembly.instantiateStreaming?WebAssembly.instantiateStreaming(a,n).catch(e=>a.then(t=>{if("application/wasm"!=t.headers.get("Content-Type"))return console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n",e),t.arrayBuffer();throw e}).then(e=>WebAssembly.instantiate(e,n))):a.then(e=>e.arrayBuffer()).then(e=>WebAssembly.instantiate(e,n))}else t=WebAssembly.instantiate(e,n).then(t=>t instanceof WebAssembly.Instance?{instance:t,module:e}:t);return t.then(({instance:e,module:t})=>(wasm=e.exports,init.__wbindgen_wasm_module=t,wasm))}export default init;</script>
+<form id="searchbox" autocomplete="off">
+    <div class="autocomplete">
+        <input id="tinysearch" type="text" aria-label="Search through articles" placeholder="&#x1F50D; Search">
+        </label>
+    </div>
+</form>
+      </header>
+
+      <main>
+        
+<article>
+  <p class='post-meta'>Published on 
+
+
+
+
+17th of December, 2017
+</p>
+  <h1>Rust for Rubyists</h1>
+  
+  <h3>&mdash; Idiomatic Patterns in Rust and Ruby</h3>
+  
+  <p>Recently I came across a delightful article on idiomatic Ruby.
+I'm not a good Ruby developer by any means, but I realized, that a lot of the patterns are also quite common in Rust.
+What follows is a side-by-side comparison of idiomatic code in both languages.</p>
+<p>The Ruby code samples are from the <a href="https://medium.com/the-renaissance-developer/idiomatic-ruby-1b5fa1445098">original article</a>.</p>
+<h2 id="map-and-higher-order-functions">Map and Higher-Order Functions</h2>
+<p>The first example is a pretty basic iteration over elements of a container using <code>map</code>.</p>
+<a class="example" href="https://gist.github.com/LeandroTk/64ca7d6f5279e08589e21d799544e878#file-map-rb">
+<div class="ruby lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">user_ids </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> users</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">map { |</span><span style="color:#ff8f40;">user</span><span style="color:#61676c;">| user</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">id }
+</span></pre></a>
+<p>The <code>map</code> concept is also pretty standard in Rust.
+Compared to Ruby, we need to be a little more explicit here:
+If <code>users</code> is a vector of <code>User</code> objects, we first need to create an iterator from it:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=5a61b7b44ff01fabbc07dba9409d9b97&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let</span><span style="color:#61676c;"> user_ids </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> users</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">iter</span><span style="color:#61676c;">()</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">map</span><span style="color:#61676c;">(|</span><span style="color:#ff8f40;">user</span><span style="color:#61676c;">| user</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">id)</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>You might say that's quite verbose, but this additional abstraction allows us to express an important concept:
+will the iterator take ownership of the vector, or will it not?</p>
+<ul>
+<li>With <code>iter()</code>, you get a &quot;read-only view&quot; into the vector. After the iteration, it will be unchanged.</li>
+<li>With <code>into_iter()</code>, you take ownership over the vector. After the iteration, the vector will be gone.
+In Rust terminology, it will have <em>moved</em>.</li>
+<li>Read some more about the <a href="http://hermanradtke.com/2015/06/22/effectively-using-iterators-in-rust.html">difference between <code>iter()</code> and <code>into_iter()</code> here</a>.</li>
+</ul>
+<p>The above Ruby code can be simplified like this:</p>
+<a class="example" href="https://gist.github.com/LeandroTk/258652cbaea308ccfeddc5df5bb9f37b#file-each_vs_map_3-rb">
+<div class="ruby lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">user_ids </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> users</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">map(</span><span style="color:#ed9366;">&amp;</span><span style="color:#86b300;">:id</span><span style="color:#61676c;">)
+</span></pre></a>
+<p>In Ruby, higher-order functions (like <code>map</code>) take <a href="http://awaxman11.github.io/blog/2013/08/05/what-is-the-difference-between-a-block/">blocks or procs</a> as an argument and the language provides a convenient shortcut for method invocation — <code>&amp;:id</code> is the same as <code>{|o| o.id()}</code>.</p>
+<p>Something similar could be done in Rust:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=131027a481d4691821315ad308d26dc9&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let </span><span style="color:#f29718;">id </span><span style="color:#ed9366;">= </span><span style="color:#61676c;">|</span><span style="color:#ff8f40;">u</span><span style="color:#61676ccc;">: </span><span style="color:#ed9366;">&amp;</span><span style="color:#61676c;">User| u</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">id</span><span style="color:#61676ccc;">;
+</span><span style="color:#fa6e32;">let</span><span style="color:#61676c;"> user_ids </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> users</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">iter</span><span style="color:#61676c;">()</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">map</span><span style="color:#61676c;">(id)</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>This is probably not the most idiomatic way to do it, though. What you will see more often is the use of <a href="https://doc.rust-lang.org/book/first-edition/ufcs.html">Universal Function Call Syntax</a> in this case:<sup><a href="#fn1" id="ref1">1</a></sup></p>
+<a class="example" href="https://play.rust-lang.org/?gist=51069ee76e5d534621ccd6633474b630&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let</span><span style="color:#61676c;"> user_ids </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> users</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">iter</span><span style="color:#61676c;">()</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">map</span><span style="color:#61676c;">(User</span><span style="color:#ed9366;">::</span><span style="color:#61676c;">id)</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>In Rust, higher-order functions take <strong>functions</strong> as an argument. Therefore <code>users.iter().map(Users::id)</code> is more or less equivalent to <code>users.iter().map(|u| u.id())</code>.<sup><a href="#fn2" id="ref2">2</a></sup></p>
+<p>Also, <code>map()</code> in Rust returns another iterator and not a collection.
+If you want a collection, you would have to run <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#examples-23"><code>collect()</code></a> on that, as we'll see later.</p>
+<h2 id="iteration-with-each">Iteration with Each</h2>
+<p>Speaking of iteration, one pattern that I see a lot in Ruby code is this:</p>
+<a class="example" href="https://gist.github.com/mre/f6552360a4c08f2c064da7f00d434d5c">
+<div class="ruby lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">[</span><span style="color:#86b300;">&quot;Ruby&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;Rust&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;Python&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;Cobol&quot;</span><span style="color:#61676c;">]</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">each </span><span style="color:#fa6e32;">do </span><span style="color:#61676c;">|</span><span style="color:#ff8f40;">lang</span><span style="color:#61676c;">|
+  </span><span style="color:#f07171;">puts </span><span style="color:#86b300;">&quot;Hello </span><span style="color:#61676c;">#{</span><span style="color:#86b300;">lang</span><span style="color:#61676c;">}</span><span style="color:#86b300;">!&quot;
+</span><span style="color:#fa6e32;">end
+</span></pre></a>
+<p>Since <a href="https://blog.rust-lang.org/2017/10/12/Rust-1.21.html">Rust 1.21</a>, this is now also possible:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=549d38bc43549fd5444c731d2bc3a47b&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">[</span><span style="color:#86b300;">&quot;Ruby&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;Rust&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;Python&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;Cobol&quot;</span><span style="color:#61676c;">]
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">iter</span><span style="color:#61676c;">()
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">for_each</span><span style="color:#61676c;">(|</span><span style="color:#ff8f40;">lang</span><span style="color:#61676c;">| </span><span style="color:#f07171;">println!</span><span style="color:#61676c;">(</span><span style="color:#86b300;">&quot;Hello </span><span style="color:#ff8f40;">{lang}</span><span style="color:#86b300;">!&quot;</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> lang </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> lang))</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>Although, more commonly one would write that as a normal for-loop in Rust:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=a7691b56b1dfd1fb19aa00a91b39589d&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">for</span><span style="color:#61676c;"> lang </span><span style="color:#ed9366;">in </span><span style="color:#61676c;">[</span><span style="color:#86b300;">&quot;Ruby&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;Rust&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;Python&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;Cobol&quot;</span><span style="color:#61676c;">]</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">iter</span><span style="color:#61676c;">() {
+    </span><span style="color:#f07171;">println!</span><span style="color:#61676c;">(</span><span style="color:#86b300;">&quot;Hello </span><span style="color:#ff8f40;">{lang}</span><span style="color:#86b300;">!&quot;</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> lang </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> lang)</span><span style="color:#61676ccc;">;
+</span><span style="color:#61676c;">}
+</span></pre></a>
+<h2 id="select-and-filter">Select and filter</h2>
+<p>Let's say you want to extract only even numbers from a collection in Ruby.</p>
+<a class="example" href="https://gist.github.com/LeandroTk/f341051889e27c99ddd66c075e5ef6d0#file-map_vs_select_1-rb">
+<div class="ruby lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">even_numbers </span><span style="color:#ed9366;">= </span><span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">4</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">5</span><span style="color:#61676c;">]</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">map { |</span><span style="color:#ff8f40;">element</span><span style="color:#61676c;">| element </span><span style="color:#fa6e32;">if</span><span style="color:#61676c;"> element</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">even? } </span><span style="font-style:italic;color:#abb0b6;"># [ni, 2, nil, 4, nil]
+</span><span style="color:#61676c;">even_numbers </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> even_numbers</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">compact </span><span style="font-style:italic;color:#abb0b6;"># [2, 4]
+</span></pre></a>
+<p>In this example, before calling <code>compact</code>, our <code>even_numbers</code> array had <code>nil</code> entries.
+Well, in Rust there is no concept of <code>nil</code> or <code>Null</code>. You don't need a <code>compact</code>.
+Also, <code>map</code> doesn't take predicates. You would use <code>filter</code> for that:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=494d6e3ff016c21931e3495b10c8f6ee&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let</span><span style="color:#61676c;"> even_numbers </span><span style="color:#ed9366;">= </span><span style="color:#f07171;">vec!</span><span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">4</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">5</span><span style="color:#61676c;">]
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">iter</span><span style="color:#61676c;">()
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">filter</span><span style="color:#61676c;">(|</span><span style="color:#ed9366;">&amp;</span><span style="color:#ff8f40;">element</span><span style="color:#61676c;">| element </span><span style="color:#ed9366;">% </span><span style="color:#ff8f40;">2 </span><span style="color:#ed9366;">== </span><span style="color:#ff8f40;">0</span><span style="color:#61676c;">)</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>or, to make a vector out of the result</p>
+<a class="example" href="https://play.rust-lang.org/?gist=45c6dbd2d35316c73165c5571d66df9d&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="font-style:italic;color:#abb0b6;">// Result: [2, 4]
+</span><span style="color:#fa6e32;">let</span><span style="color:#61676c;"> even_numbers</span><span style="color:#61676ccc;">: </span><span style="color:#61676c;">Vec&lt;</span><span style="color:#fa6e32;">i64</span><span style="color:#61676c;">&gt; </span><span style="color:#ed9366;">= </span><span style="color:#f07171;">vec!</span><span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">4</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">5</span><span style="color:#61676c;">]
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">into_iter</span><span style="color:#61676c;">()
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">filter</span><span style="color:#61676c;">(|</span><span style="color:#ff8f40;">element</span><span style="color:#61676c;">| element </span><span style="color:#ed9366;">% </span><span style="color:#ff8f40;">2 </span><span style="color:#ed9366;">== </span><span style="color:#ff8f40;">0</span><span style="color:#61676c;">)</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">collect</span><span style="color:#61676c;">()</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>Some hints:</p>
+<ul>
+<li>I'm using the type hint <code>Vec&lt;i64&gt;</code> here because, without it, Rust does not know what collection I want to build when calling <code>collect</code>.</li>
+<li><code>vec!</code> is a macro for creating a vector.</li>
+<li>Instead of <code>iter</code>, I use <code>into_iter</code>. This way, I take ownership of the elements in the vector. With <code>iter()</code> I would get a <code>Vec&lt;&amp;i64&gt;</code> instead.</li>
+</ul>
+<p>In Rust, there is no <code>even</code> method on numbers, but that doesn't keep us from defining one!</p>
+<a class="example" href="https://play.rust-lang.org/?gist=c289c2a1cf8bd870cbd5cc2cd60ea791&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let </span><span style="color:#f29718;">even </span><span style="color:#ed9366;">= </span><span style="color:#61676c;">|</span><span style="color:#ff8f40;">x</span><span style="color:#61676ccc;">: </span><span style="color:#ed9366;">&amp;</span><span style="color:#fa6e32;">i64</span><span style="color:#61676c;">| x </span><span style="color:#ed9366;">% </span><span style="color:#ff8f40;">2 </span><span style="color:#ed9366;">== </span><span style="color:#ff8f40;">0</span><span style="color:#61676ccc;">;
+</span><span style="color:#fa6e32;">let</span><span style="color:#61676c;"> even_numbers </span><span style="color:#ed9366;">= </span><span style="color:#f07171;">vec!</span><span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">4</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">5</span><span style="color:#61676c;">]</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">into_iter</span><span style="color:#61676c;">()</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">filter</span><span style="color:#61676c;">(even)</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>In a real-world scenario, you would probably use a third-party package (crate) like <a href="https://github.com/rust-num/num"><code>num</code></a> for numerical mathematics:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=e4bbbf60b7b1cbbedfb363672731bf53&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">extern crate</span><span style="color:#61676c;"> num</span><span style="color:#61676ccc;">;
+</span><span style="color:#fa6e32;">use </span><span style="color:#61676c;">num</span><span style="color:#ed9366;">::</span><span style="color:#61676c;">Integer</span><span style="color:#61676ccc;">;
+
+</span><span style="color:#fa6e32;">fn </span><span style="color:#f29718;">main</span><span style="color:#61676c;">() {
+    </span><span style="color:#fa6e32;">let</span><span style="color:#61676c;"> even_numbers</span><span style="color:#61676ccc;">: </span><span style="color:#61676c;">Vec&lt;</span><span style="color:#fa6e32;">i64</span><span style="color:#61676c;">&gt; </span><span style="color:#ed9366;">= </span><span style="color:#f07171;">vec!</span><span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">4</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">5</span><span style="color:#61676c;">]
+        </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">into_iter</span><span style="color:#61676c;">()
+        </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">filter</span><span style="color:#61676c;">(|</span><span style="color:#ff8f40;">x</span><span style="color:#61676c;">| x</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">is_even</span><span style="color:#61676c;">())</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">collect</span><span style="color:#61676c;">()</span><span style="color:#61676ccc;">;
+</span><span style="color:#61676c;">}
+</span></pre></a>
+<p>In general, it's quite common to use crates in Rust for functionality that is not in the standard lib.
+Part of the reason why this is so well accepted is that <a href="https://github.com/rust-lang/cargo">cargo</a> is such a rad package manager.
+(Maybe because it was built by no other than <a href="http://yehudakatz.com/about/">Yehuda Katz</a> of Ruby fame. 😉)</p>
+<p>As mentioned before, Rust does not have <code>nil</code>. However, there is still the concept of operations that can fail.
+The canonical type to express that is called <a href="https://doc.rust-lang.org/std/result/"><code>Result</code></a>.</p>
+<p>Let's say you want to convert a vector of strings to integers.</p>
+<a class="example" href="https://play.rust-lang.org/?gist=1365d177503ee2d32c4aa594263ee4d4&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let</span><span style="color:#61676c;"> maybe_numbers </span><span style="color:#ed9366;">= </span><span style="color:#f07171;">vec!</span><span style="color:#61676c;">[</span><span style="color:#86b300;">&quot;1&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;2&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;nah&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;nope&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;3&quot;</span><span style="color:#61676c;">]</span><span style="color:#61676ccc;">;
+</span><span style="color:#fa6e32;">let</span><span style="color:#61676c;"> numbers</span><span style="color:#61676ccc;">: </span><span style="color:#61676c;">Vec&lt;</span><span style="color:#ed9366;">_</span><span style="color:#61676c;">&gt; </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> maybe_numbers
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">into_iter</span><span style="color:#61676c;">()
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">map</span><span style="color:#61676c;">(|</span><span style="color:#ff8f40;">i</span><span style="color:#61676c;">| i</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">parse</span><span style="color:#ed9366;">::</span><span style="color:#61676c;">&lt;</span><span style="color:#fa6e32;">u64</span><span style="color:#61676c;">&gt;())
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">collect</span><span style="color:#61676c;">()</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>That looks nice, but maybe the output is a little unexpected. <code>numbers</code> will also contain the parsing errors:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=1365d177503ee2d32c4aa594263ee4d4&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">[</span><span style="font-style:italic;color:#55b4d4;">Ok</span><span style="color:#61676c;">(</span><span style="color:#ff8f40;">1</span><span style="color:#61676c;">)</span><span style="color:#61676ccc;">, </span><span style="font-style:italic;color:#55b4d4;">Ok</span><span style="color:#61676c;">(</span><span style="color:#ff8f40;">2</span><span style="color:#61676c;">)</span><span style="color:#61676ccc;">, </span><span style="font-style:italic;color:#55b4d4;">Err</span><span style="color:#61676c;">(ParseIntError { kind</span><span style="color:#61676ccc;">:</span><span style="color:#61676c;"> InvalidDigit })</span><span style="color:#61676ccc;">, </span><span style="font-style:italic;color:#55b4d4;">Err</span><span style="color:#61676c;">(ParseIntError { kind</span><span style="color:#61676ccc;">:</span><span style="color:#61676c;"> InvalidDigit })</span><span style="color:#61676ccc;">, </span><span style="font-style:italic;color:#55b4d4;">Ok</span><span style="color:#61676c;">(</span><span style="color:#ff8f40;">3</span><span style="color:#61676c;">)]
+</span></pre></a>
+<p>Sometimes you're just interested in the successful operations.
+An easy way to filter out the errors is to use <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter_map"><code>filter_map</code></a>:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=afdc823ec2e165ac0a03948fb323d305&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let</span><span style="color:#61676c;"> maybe_numbers </span><span style="color:#ed9366;">= </span><span style="color:#f07171;">vec!</span><span style="color:#61676c;">[</span><span style="color:#86b300;">&quot;1&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;2&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;nah&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;nope&quot;</span><span style="color:#61676ccc;">, </span><span style="color:#86b300;">&quot;3&quot;</span><span style="color:#61676c;">]</span><span style="color:#61676ccc;">;
+</span><span style="color:#fa6e32;">let</span><span style="color:#61676c;"> numbers</span><span style="color:#61676ccc;">: </span><span style="color:#61676c;">Vec&lt;</span><span style="color:#ed9366;">_</span><span style="color:#61676c;">&gt; </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> maybe_numbers
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">into_iter</span><span style="color:#61676c;">()
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">filter_map</span><span style="color:#61676c;">(|</span><span style="color:#ff8f40;">i</span><span style="color:#61676c;">| i</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">parse</span><span style="color:#ed9366;">::</span><span style="color:#61676c;">&lt;</span><span style="color:#fa6e32;">u64</span><span style="color:#61676c;">&gt;()</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">ok</span><span style="color:#61676c;">())
+    </span><span style="color:#ed9366;">.</span><span style="color:#f07171;">collect</span><span style="color:#61676c;">()</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>I changed two things here:</p>
+<ul>
+<li>Instead of <code>map</code>, I'm now using <code>filter_map</code>.</li>
+<li><code>parse</code> returns a <code>Result</code>, but <code>filter_map</code> expects an <code>Option</code>. We can convert a <code>Result</code> into an <code>Option</code> by calling <code>ok()</code> on it<sup><a href="#fn3" id="ref3">3</a></sup>.</li>
+</ul>
+<p>The return value contains all successfully converted strings:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=afdc823ec2e165ac0a03948fb323d305&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676c;">]
+</span></pre></a>
+<p>The <code>filter_map</code> is similar to the <code>select</code> method in Ruby:</p>
+<a class="example" href="https://gist.github.com/LeandroTk/1ae24e0fece0207f814932b0ac6c4a5e#file-map_vs_select_2-rb">
+<div class="ruby lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">4</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">5</span><span style="color:#61676c;">]</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">select </span><span style="color:#61676c;">{ |</span><span style="color:#ff8f40;">element</span><span style="color:#61676c;">| element</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">even? }
+</span></pre></a>
+<h2 id="random-numbers">Random numbers</h2>
+<p>Here's how to get a random number from an array in Ruby:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=a66785b44094bacb78fa8dd822bfeab5&version=stable">
+<div class="ruby lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676c;">]</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">sample
+</span></pre></a>
+<p>That's quite nice and idiomatic!
+Compare that to Rust:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=bed7fca31737bcbf4b9aed427cc22713&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let mut</span><span style="color:#61676c;"> rng </span><span style="color:#ed9366;">= </span><span style="color:#f07171;">thread_rng</span><span style="color:#61676c;">()</span><span style="color:#61676ccc;">;</span><span style="color:#61676c;">
+rng</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">choose</span><span style="color:#61676c;">(</span><span style="color:#ed9366;">&amp;</span><span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">4</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">5</span><span style="color:#61676c;">])
+</span></pre></a>
+<p>For the code to work, you need the <code>rand</code> crate. Click on the snippet for a running example.</p>
+<p>There are some differences to Ruby. Namely, we need to be more explicit about what random number generator
+we want <em>exactly</em>. We decide for a <a href="https://docs.rs/rand/0.6.1/rand/fn.thread_rng.html">lazily-initialized thread-local random number generator, seeded by the system</a>.
+In this case, I'm using a <a href="https://doc.rust-lang.org/std/slice/">slice</a> instead of a vector. The main difference is that the slice has a fixed size while the vector does not.</p>
+<p>Within the standard library, Rust doesn't have a <code>sample</code> or <code>choose</code> method on the slice itself. 
+That's a design decision: the core of the language is kept small to allow evolving the language in the future.</p>
+<p>This doesn't mean that you cannot have a nicer implementation today.
+For instance, you could define a <code>Choose</code> <a href="https://doc.rust-lang.org/book/second-edition/ch10-00-generics.html">trait</a> and implement it for <code>[T]</code>.</p>
+<a class="example" href="https://play.rust-lang.org/?gist=a66785b44094bacb78fa8dd822bfeab5&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">extern crate</span><span style="color:#61676c;"> rand</span><span style="color:#61676ccc;">;
+</span><span style="color:#fa6e32;">use </span><span style="color:#61676c;">rand</span><span style="color:#ed9366;">::</span><span style="color:#61676c;">{thread_rng</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> Rng}</span><span style="color:#61676ccc;">;
+
+</span><span style="color:#fa6e32;">trait </span><span style="color:#399ee6;">Choose</span><span style="color:#61676c;">&lt;T&gt; {
+    </span><span style="color:#fa6e32;">fn </span><span style="color:#f29718;">choose</span><span style="color:#61676c;">(</span><span style="color:#ed9366;">&amp;</span><span style="color:#ff8f40;">self</span><span style="color:#61676c;">) </span><span style="color:#61676ccc;">-&gt; </span><span style="color:#61676c;">Option&lt;</span><span style="color:#ed9366;">&amp;</span><span style="color:#61676c;">T&gt;</span><span style="color:#61676ccc;">;
+</span><span style="color:#61676c;">}
+
+</span><span style="color:#fa6e32;">impl</span><span style="color:#61676c;">&lt;T&gt; Choose&lt;T&gt; </span><span style="color:#fa6e32;">for</span><span style="color:#61676c;"> [</span><span style="color:#399ee6;">T</span><span style="color:#61676c;">] {
+    </span><span style="color:#fa6e32;">fn </span><span style="color:#f29718;">choose</span><span style="color:#61676c;">(</span><span style="color:#ed9366;">&amp;</span><span style="color:#ff8f40;">self</span><span style="color:#61676c;">) </span><span style="color:#61676ccc;">-&gt; </span><span style="color:#61676c;">Option&lt;</span><span style="color:#ed9366;">&amp;</span><span style="color:#61676c;">T&gt; {
+        </span><span style="color:#fa6e32;">let mut</span><span style="color:#61676c;"> rng </span><span style="color:#ed9366;">= </span><span style="color:#f07171;">thread_rng</span><span style="color:#61676c;">()</span><span style="color:#61676ccc;">;</span><span style="color:#61676c;">
+        rng</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">choose</span><span style="color:#61676c;">(</span><span style="color:#ed9366;">&amp;</span><span style="font-style:italic;color:#55b4d4;">self</span><span style="color:#61676c;">)
+    }
+}
+</span></pre></a>
+<p>This boilerplate could be put into a crate to make it reusable for others.
+With that, we arrive at a solution that rivals Ruby's elegance.</p>
+<a class="example" href="https://play.rust-lang.org/?gist=a66785b44094bacb78fa8dd822bfeab5&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">4</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">8</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">16</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">32</span><span style="color:#61676c;">]</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">choose</span><span style="color:#61676c;">()
+</span></pre></a>
+<h2 id="implicit-returns-and-expressions">Implicit returns and expressions</h2>
+<p>Ruby methods automatically return the result of the last statement.</p>
+<a class="example" href="https://gist.github.com/LeandroTk/9ede60f0898979f8f74d2869ed014c0c#file-return_2-rb">
+<div class="ruby lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">def </span><span style="color:#f29718;">get_user_ids</span><span style="color:#61676c;">(</span><span style="color:#ff8f40;">users</span><span style="color:#61676c;">)
+  users</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">map(</span><span style="color:#ed9366;">&amp;</span><span style="color:#86b300;">:id</span><span style="color:#61676c;">)
+</span><span style="color:#fa6e32;">end
+</span></pre></a>
+<p>Same for Rust. Note the missing semicolon.</p>
+<a class="example" href="https://play.rust-lang.org/?gist=c7130debb2f712269380bd04819069ff&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">fn </span><span style="color:#f29718;">get_user_ids</span><span style="color:#61676c;">(</span><span style="color:#ff8f40;">users</span><span style="color:#61676ccc;">: </span><span style="color:#ed9366;">&amp;</span><span style="color:#61676c;">[User]) </span><span style="color:#61676ccc;">-&gt; </span><span style="color:#61676c;">Vec&lt;</span><span style="color:#fa6e32;">u64</span><span style="color:#61676c;">&gt; {
+    users</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">iter</span><span style="color:#61676c;">()</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">map</span><span style="color:#61676c;">(|</span><span style="color:#ff8f40;">user</span><span style="color:#61676c;">| user</span><span style="color:#ed9366;">.</span><span style="color:#61676c;">id)</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">collect</span><span style="color:#61676c;">()
+}
+</span></pre></a>
+<p>But in Rust, this is just the beginning, because <em>everything</em> is an expression.
+The following block splits a string into characters, removes the <code>h</code>, and returns the result as a <code>HashSet</code>.
+This <code>HashSet</code> will be assigned to <code>x</code>.</p>
+<a class="example" href="https://play.rust-lang.org/?gist=9ad54a58d3e5f1c06e795b5f7dca451e&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let</span><span style="color:#61676c;"> x</span><span style="color:#61676ccc;">: </span><span style="color:#61676c;">HashSet&lt;</span><span style="color:#ed9366;">_</span><span style="color:#61676c;">&gt; </span><span style="color:#ed9366;">= </span><span style="color:#61676c;">{
+    </span><span style="font-style:italic;color:#abb0b6;">// Get unique chars of a word {&#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;o&#39;}
+    </span><span style="color:#fa6e32;">let</span><span style="color:#61676c;"> unique </span><span style="color:#ed9366;">= </span><span style="color:#86b300;">&quot;hello&quot;</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">chars</span><span style="color:#61676c;">()</span><span style="color:#61676ccc;">;
+    </span><span style="font-style:italic;color:#abb0b6;">// filter out the &#39;h&#39;
+</span><span style="color:#61676c;">    unique</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">filter</span><span style="color:#61676c;">(|</span><span style="color:#ed9366;">&amp;</span><span style="color:#ff8f40;">char</span><span style="color:#61676c;">| </span><span style="color:#fa6e32;">char </span><span style="color:#ed9366;">!= </span><span style="color:#86b300;">&#39;h&#39;</span><span style="color:#61676c;">)</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">collect</span><span style="color:#61676c;">()
+}</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>Same works for conditions:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=cec96176079e8812ff62ad84a432ac9d&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let</span><span style="color:#61676c;"> x </span><span style="color:#ed9366;">= </span><span style="color:#fa6e32;">if </span><span style="color:#ff8f40;">1 </span><span style="color:#ed9366;">&gt; </span><span style="color:#ff8f40;">0 </span><span style="color:#61676c;">{ </span><span style="color:#86b300;">&quot;absolutely!&quot; </span><span style="color:#61676c;">} </span><span style="color:#fa6e32;">else </span><span style="color:#61676c;">{ </span><span style="color:#86b300;">&quot;no seriously&quot; </span><span style="color:#61676c;">}</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>Since a <a href="https://doc.rust-lang.org/1.2.0/book/match.html"><code>match</code></a> statement is also an expression, you can assign the result to a variable, too!</p>
+<a class="example" href="https://play.rust-lang.org/?gist=a6b32fae6257787432cf607f5772693e&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">enum </span><span style="color:#399ee6;">Unit </span><span style="color:#61676c;">{
+    Meter</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;">
+    Yard</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;">
+    Angstroem</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;">
+    Lightyear</span><span style="color:#61676ccc;">,
+</span><span style="color:#61676c;">}
+
+</span><span style="color:#fa6e32;">let</span><span style="color:#61676c;"> length_in_meters </span><span style="color:#ed9366;">= </span><span style="color:#fa6e32;">match</span><span style="color:#61676c;"> unit {
+    Unit</span><span style="color:#ed9366;">::</span><span style="color:#61676c;">Meter </span><span style="color:#ed9366;">=&gt; </span><span style="color:#ff8f40;">1.0</span><span style="color:#61676ccc;">,
+    </span><span style="color:#61676c;">Unit</span><span style="color:#ed9366;">::</span><span style="color:#61676c;">Yard </span><span style="color:#ed9366;">=&gt; </span><span style="color:#ff8f40;">0.91</span><span style="color:#61676ccc;">,
+    </span><span style="color:#61676c;">Unit</span><span style="color:#ed9366;">::</span><span style="color:#61676c;">Angstroem </span><span style="color:#ed9366;">=&gt; </span><span style="color:#ff8f40;">0.0000000001</span><span style="color:#61676ccc;">,
+    </span><span style="color:#61676c;">Unit</span><span style="color:#ed9366;">::</span><span style="color:#61676c;">Lightyear </span><span style="color:#ed9366;">=&gt; </span><span style="color:#ff8f40;">9.461e+15</span><span style="color:#61676ccc;">,
+</span><span style="color:#61676c;">}</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<h2 id="multiple-assignments">Multiple Assignments</h2>
+<p>In Ruby you can assign multiple values to variables in one step:</p>
+<a class="example" href="https://gist.github.com/LeandroTk/998bed8f8c20e487a1b8a638dd7563a1#file-multiple_assignment_1-rb">
+<div class="ruby lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">def </span><span style="color:#f29718;">values
+  </span><span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676c;">]
+</span><span style="color:#fa6e32;">end</span><span style="color:#61676c;">
+
+one</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> two</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> three </span><span style="color:#ed9366;">=</span><span style="color:#61676c;"> values
+</span></pre></a>
+<p>In Rust, you can only decompose tuples into tuples, but not a vector into a tuple for example.
+So this will work:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=11b02c318ec35456b8247c3161cb341b&version=nightly">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let </span><span style="color:#61676c;">(one</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> two</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> three) </span><span style="color:#ed9366;">= </span><span style="color:#61676c;">(</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676c;">)</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>But this won't:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=11b02c318ec35456b8247c3161cb341b&version=nightly">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let </span><span style="color:#61676c;">(one</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> two</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> three) </span><span style="color:#ed9366;">= </span><span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676c;">]</span><span style="color:#61676ccc;">;
+</span><span style="font-style:italic;color:#abb0b6;">//    ^^^^^^^^^^^^^^^^^ expected array of 3 elements, found tuple
+</span></pre></a>
+<p>Neither will this:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=11b02c318ec35456b8247c3161cb341b&version=nightly">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let </span><span style="color:#61676c;">(one</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> two</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> three) </span><span style="color:#ed9366;">= </span><span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676c;">]</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">iter</span><span style="color:#61676c;">()</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">collect</span><span style="color:#61676c;">()</span><span style="color:#61676ccc;">;
+</span><span style="font-style:italic;color:#abb0b6;">// a collection of type `(_, _, _)` cannot be built from an iterator over elements of type `&amp;{integer}`
+</span></pre></a>
+<p>But with nightly Rust, you can now do this:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=11b02c318ec35456b8247c3161cb341b&version=nightly">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let </span><span style="color:#61676c;">[one</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> two</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> three] </span><span style="color:#ed9366;">= </span><span style="color:#61676c;">[</span><span style="color:#ff8f40;">1</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">, </span><span style="color:#ff8f40;">3</span><span style="color:#61676c;">]</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>On the other hand, there's <a href="https://doc.rust-lang.org/book/second-edition/ch18-03-pattern-syntax.html">a lot more you can do with destructuring</a> apart from multiple assignments. You can write beautiful, ergonomic code using pattern syntax.</p>
+<a class="example" href="https://play.rust-lang.org/?gist=969612861bc6028e3b98345e21a4289e&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let</span><span style="color:#61676c;"> x </span><span style="color:#ed9366;">= </span><span style="color:#ff8f40;">4</span><span style="color:#61676ccc;">;
+</span><span style="color:#fa6e32;">let</span><span style="color:#61676c;"> y </span><span style="color:#ed9366;">= </span><span style="color:#ff8f40;">false</span><span style="color:#61676ccc;">;
+
+</span><span style="color:#fa6e32;">match</span><span style="color:#61676c;"> x {
+    </span><span style="color:#ff8f40;">4 </span><span style="color:#ed9366;">| </span><span style="color:#ff8f40;">5 </span><span style="color:#ed9366;">| </span><span style="color:#ff8f40;">6 </span><span style="color:#fa6e32;">if</span><span style="color:#61676c;"> y </span><span style="color:#ed9366;">=&gt; </span><span style="color:#f07171;">println!</span><span style="color:#61676c;">(</span><span style="color:#86b300;">&quot;yes&quot;</span><span style="color:#61676c;">)</span><span style="color:#61676ccc;">,
+    </span><span style="color:#ed9366;">_ =&gt; </span><span style="color:#f07171;">println!</span><span style="color:#61676c;">(</span><span style="color:#86b300;">&quot;no&quot;</span><span style="color:#61676c;">)</span><span style="color:#61676ccc;">,
+</span><span style="color:#61676c;">}
+</span></pre></a>
+<p>To quote <em><a href="https://doc.rust-lang.org/book/second-edition/ch18-03-pattern-syntax.html">The Book</a></em>:</p>
+<blockquote>
+<p>This prints <code>no</code> since the if condition applies to the whole pattern <code>4 | 5 | 6</code>, not only to the last value 6.</p>
+</blockquote>
+<h2 id="string-interpolation">String interpolation</h2>
+<p>Ruby has <a href="http://ruby-doc.org/docs/ruby-doc-bundle/ProgrammingRuby/book/ref_m_kernel.html#Kernel.sprintf">extensive string interpolation support</a>.</p>
+<a class="example" href="https://gist.github.com/LeandroTk/5125cab5e74d26460124c786ac5df534#file-interpolation-rb">
+<div class="ruby lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#61676c;">programming_language </span><span style="color:#ed9366;">= </span><span style="color:#86b300;">&quot;Ruby&quot;
+&quot;</span><span style="color:#61676c;">#{</span><span style="color:#86b300;">programming_language</span><span style="color:#61676c;">}</span><span style="color:#86b300;"> is a beautiful programming language&quot;
+</span></pre></a>
+<p>This can be translated like so:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=6920e723137e44c4befe3398721fafa1&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">let</span><span style="color:#61676c;"> programming_language </span><span style="color:#ed9366;">= </span><span style="color:#86b300;">&quot;Rust&quot;</span><span style="color:#61676ccc;">;
+</span><span style="color:#f07171;">format!</span><span style="color:#61676c;">(</span><span style="color:#86b300;">&quot;</span><span style="color:#ff8f40;">{}</span><span style="color:#86b300;"> is also a beautiful programming language&quot;</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> programming_language)</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>Named arguments are also possible, albeit much less common:</p>
+<a class="example" href="https://play.rust-lang.org/?gist=6920e723137e44c4befe3398721fafa1&version=stable">
+<div class="rust lang-icon"></div>
+<pre style="background-color:#fafafa;">
+<span style="color:#f07171;">println!</span><span style="color:#61676c;">(</span><span style="color:#86b300;">&quot;</span><span style="color:#ff8f40;">{language}</span><span style="color:#86b300;"> is also a beautiful programming language&quot;</span><span style="color:#61676ccc;">,</span><span style="color:#61676c;"> language</span><span style="color:#ed9366;">=</span><span style="color:#86b300;">&quot;Rust&quot;</span><span style="color:#61676c;">)</span><span style="color:#61676ccc;">;
+</span></pre></a>
+<p>Rust's <code>println!()</code> syntax is even more extensive than Ruby's. <a href="https://doc.rust-lang.org/std/fmt/">Check the docs</a> if you're curious about what else you can do.</p>
+<h2 id="that-s-it">That’s it!</h2>
+<p>Ruby comes with syntactic sugar for many common usage patterns, which allows for very elegant code.
+Low-level programming and raw performance are no primary goals of the language.</p>
+<p>If you do need that, Rust might be a good fit, because it provides fine-grained hardware control with comparable ergonomics.
+If in doubt, Rust favors explicitness, though; it eschews magic.</p>
+<p>Did I whet your appetite for idiomatic Rust? Have a look at <a href="https://github.com/mre/idiomatic-rust">this Github project</a>. I'd be thankful for contributions.</p>
+<h2 id="footnotes">Footnotes</h2>
+<p><sup id="fn1">1. Thanks to <a href="https://twitter.com/Argorak">Florian Gilcher</a> for the hint.<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup><br />
+<sup id="fn2">2. Thanks to <a href="https://www.reddit.com/user/masklinn">masklin</a> for pointing out multiple inaccuracies.<a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a></sup><br />
+<sup id="fn3">3. In the first version, I sait that <code>ok()</code> would convert a <code>Result</code> into a <code>boolean</code>, which was wrong. Thanks to <a href="https://news.ycombinator.com/item?id=16003080">isaacg</a> for the correction.<a href="#ref3" title="Jump back to footnote 3 in the text.">↩</a></sup></p>
+
+
+  <ul class='post-links'>
+    <li>
+    💡Found an error? Please <a href="https://github.com/mre/mre.github.io/edit/source/content/2017&#x2F;rust-for-rubyists&#x2F;index.md">propose a change</a> on Github.
+    </li>
+    
+    <li>
+      
+💬 Comments on
+
+<a href="https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;programming&#x2F;comments&#x2F;7kefgh&#x2F;rust_for_rubyists&#x2F;">Reddit</a>,
+
+<a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=15986838#16003994">Hacker News</a>.
+
+
+    </li>
+    
+    
+  </ul>
+</article>
+
+      </main>
+      <img
+        alt="Page view statistics"
+        style="display:none"
+        src="https://ping.endler.dev/x.gif"
+      />
+    </div>
+    
+
+<section id="teaser">
+    <div class="body">
+        <h2><a href="https:&#x2F;&#x2F;endler.dev&#x2F;2017&#x2F;obsolete&#x2F;">Making Myself Obsolete</a></h2>
+        <p>
+        
+    
+        The Stegosaurus had better days 150 million years ago.
+        
+        Paleontologists once thought it had a brain in its butt.
+    
+ 
+In December 2015 I was looking for static analysis tools to integrate into trivago's CI process.
+The idea was to detect typical programming m… <a
+                href="https:&#x2F;&#x2F;endler.dev&#x2F;2017&#x2F;obsolete&#x2F;">Continue
+                reading</a></p>
+    </div>
+</section>
+
+ <footer>
+    <div class="body">
+        <div>
+            <h2><a href="/about">About me</a></h2>
+            <p>
+                I'm a Backend Engineer running <i><a href="http://hello-rust.show/">Hello, Rust!</a></i>, a YouTube
+                channel about the Rust
+                programming language.
+                On this blog, you'll mostly find articles about programming in
+                <a href="/2017/yes/">Rust</a> and <a href="/2018/go-io-testing/">Golang</a> or developer tools like <a
+                    href="/2017/makefiles/">make</a> and <a href="/2018/ten-years-of-vim/">Vim</a>. We should hang out
+                some
+                time.
+                It'll be great.<br />
+            </p>
+        </div>
+
+
+        <div>
+            <h2><a href="https://github.com/sponsors/mre/">Support</a></h2>
+            <p>
+                Creating and maintaining this blog and my projects is a lot of
+                work. By supporting me, you allow me to invest more time in new
+                content, new features, and continuous maintenance. The best way
+                to support me is to <a href="https://github.com/sponsors/mre/">sponsor me on GitHub</a>.
+                GitHub will even match sponsorships until October 2020!
+                Alternatively, I also have <a
+                href="https://www.patreon.com/hellorust">Patreon</a> account. Thank you! ❤️
+            </p>
+        </div>
+
+
+        <div>
+            <form action="https://tinyletter.com/mre" method="post" target="popupwindow"
+                onsubmit="window.open('https://tinyletter.com/mre', 'popupwindow', 'scrollbars=yes,width=800,height=600'); return true">
+                <p><label for="tlemail">Wow! I also have a newsletter for new articles:</label></p>
+                <p>
+                    <input class="field email" type="email" name="email" id="tlemail" placeholder="E-Mail Address" />
+                    <input type="hidden" value="1" name="embed" /><input class="field submit" type="submit"
+                        value="Subscribe" />
+                </p>
+            </form>
+            <p>
+                <a href="https://twitter.com/matthiasendler">Twitter</a> is also fine.
+            </p>
+        </div>
+    </div>
+</footer> 
+  </body>
+</html>

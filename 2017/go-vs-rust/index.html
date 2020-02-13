@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <style>
+      html,body,div,form,fieldset,legend,label,h1,h2{margin:0;padding:0}html,body{height:100%}body{font-family:Georgia, Times, serif;font-size:120%;line-height:1.58;border-top:0.5em solid #c35}.container{display:flex;flex-direction:column;margin:0px auto;margin-top:10px}header{font-size:0.8em;text-align:center}.bio{width:210px;margin:auto;padding:16px}main{padding:20px;margin-bottom:50px;max-width:650px}figure a{border:none}figure a:hover{border:none}nav a,nav a:hover{border-bottom:none}main article{margin-bottom:44px}main img{max-width:100%}main video{max-width:100%}.homepage h1{font-size:130%}@media screen and (max-width: 640px){body{font-size:110%}}@media screen and (min-width: 800px){.container{flex-direction:row;justify-content:center;margin-top:70px}main{padding:0px 30px}.bio span:after{content:"Writes about Rust, low-level computing, and microwave clocks."}}h1,h2,h3,h4,h5,h6,th,td,caption{font-weight:400}.post-meta{font-style:italic;margin:0px;font-size:90%}.homepage .post-meta{font-size:80%}.post-links{list-style:none;padding:24px 0 0 0;margin-top:40px;border-top:solid 1px #555}code{background:#fafafa;border-radius:6px;display:inline-block;font-family:"Courier New", "Courier", monospace;-moz-font-feature-settings:"liga" off;font-feature-settings:"liga" off;font-size:16px;-moz-osx-font-smoothing:auto;-webkit-font-smoothing:subpixel-antialiased;max-width:100%;overflow-x:auto;padding:0 5px;vertical-align:middle;word-wrap:normal;box-shadow:0 1px 1px rgba(0,0,0,0.125)}blockquote{border-left:4px solid #9fd6fa;font-style:italic;margin:4px 10px;padding:3px 20px}pre{padding:10px;border-radius:6px;overflow-x:auto;box-shadow:0 1px 1px rgba(0,0,0,0.125)}h1{font-size:1.87em;margin-bottom:8px}h2{font-size:1.2em}h3{margin-top:0px;font-style:italic}::selection{background:black;color:white}a{color:#c35;text-decoration:none;border-bottom:1px dashed #c35}a:hover{border-bottom:2px solid #c35}header nav ul{display:inline-block;padding-left:0px;margin-top:0}header nav li{list-style:none;display:inline}.icon{height:24px;width:24px;opacity:0.4;float:left;margin:5px;background-repeat:no-repeat}.icon:hover{opacity:1;transition:opacity 200ms ease-in}.button{background-color:#c35;padding:10px;color:white}figure{font-size:0.9em;font-style:italic;margin:40px 0 40px;padding:0;text-align:center;text-indent:0}figure img{width:100%}figcaption{margin-top:10px}.comments{list-style:none;display:inline}#teaser{background:#c35;color:#f5b2c8}#teaser a,footer a{color:white;border-bottom:2px solid #c35}#teaser a::after{content:"\a0»"}footer{background:#234;color:#b9b9b9}#teaser,footer{display:flex;justify-content:center}#teaser .body,footer .body{max-width:800px;margin:40px auto;padding:20px}.email{background-color:white}.submit{background-color:#b9b9b9}footer .field{padding:10px;font-size:0.8em;border:none}.autocomplete{position:relative;display:inline-block}.autocomplete input{border:1px solid #ddd;padding:10px 20px;border-radius:20px;width:150px;font-size:0.9em;box-shadow:0 1px 0px rgba(255,255,255,0.25)}input[type="submit"]{cursor:pointer}input:focus::placeholder{color:transparent}.autocomplete-items{position:absolute;left:0;top:38px;font-size:0.9em;line-height:1.5;width:100%}.autocomplete-items div{padding:10px;cursor:pointer;background-color:white;border:1px solid #ddd}.autocomplete-items div:hover,.autocomplete-active{background-color:#c35 !important;color:white}@media not screen and (max-width: 800px){.searchicon{display:none}}@media screen and (max-width: 800px){#searchbox{display:none}#searchbox:target{display:block}.autocomplete{width:100%;font-size:1.1em}.autocomplete input{width:calc(100% - 100px);margin:20px 10px}.autocomplete-items{top:58px}}.info{padding:20px;margin:30px 0;background-color:lightyellow;border:4px solid peachpuff;position:relative;border-radius:6px}.logo_font{position:relative;width:175px;height:34px;margin:0 auto}.logo_font svg{position:absolute;top:0;left:0}@media (prefers-color-scheme: light){.logo_font_dark{display:none}}@media (prefers-color-scheme: dark){.logo_font_light{display:none}}@media (prefers-color-scheme: dark){body{background:#234;color:white;border-top:0.5em solid #ff1c76}.bio,.post-meta{color:#b9b9b9}.post-links{border-top:solid 1px white}a{color:#ff1c76;border-bottom:1px dashed #ff1c76}a:hover{border-bottom:2px solid #ff1c76}.icon{filter:brightness(0) invert(1)}main img{background-color:white;border-radius:6px}code{background-color:#111}pre{background-color:#fff;-webkit-filter:invert(100%);filter:invert(100%)}.info{background:#141f2b;border-color:#555}.autocomplete input,.autocomplete-items div{border:0;background:#141f2b;color:white}footer{background:#141f2b}}
+
+    </style>
+<title>Go vs Rust? Choose Go. | Matthias Endler</title>
+<link rel="canonical" href="https://endler.dev/2017/go-vs-rust/">
+
+
+
+<meta property="og:title" content="Go vs Rust? Choose Go. | Matthias Endler" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="Rust or Go, which one should I choose? is a question I get quite often.
+Both languages seem to be competing for the same user base and they both seem to be
+*systems programming* languages, so there must be a clear winner, right?
+" />
+<meta property="og:url" content="https://endler.dev/2017/go-vs-rust/" />
+<meta property="og:image" content="https://endler.dev/2017/go-vs-rust/2017_gopher.png" />
+
+<meta name="twitter:title" content="Go vs Rust? Choose Go.">
+<meta name="twitter:description" content="Rust or Go, which one should I choose? is a question I get quite often.
+Both languages seem to be competing for the same user base and they both seem to be
+*systems programming* languages, so there must be a clear winner, right?
+">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@matthiasendler">
+<meta name="twitter:creator" content="@matthiasendler">
+<meta name="twitter:image" content="https://endler.dev/2017/go-vs-rust/2017_gopher.png">
+    <link rel="canonical" href="https://endler.dev/2017/go-vs-rust/" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png?v=m2llJQPQq8"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon-32x32.png?v=m2llJQPQq8"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon-16x16.png?v=m2llJQPQq8"
+    />
+    <link
+      rel="mask-icon"
+      href="/safari-pinned-tab.svg?v=m2llJQPQq8"
+      color="#5bbad5"
+    />
+    <link rel="shortcut icon" href="/favicon.ico?v=m2llJQPQq8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="author" content="Matthias Endler" />
+    <meta
+      name="description"
+      content="Personal website of Matthias Endler, a Software Engineer interested in low-level programming and Backend development. Rust, Go"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        
+
+
+
+<a href="/" aria-label="Go back to homepage">
+  <div style="width: 110px; margin: auto;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456 456"><defs/><g letter-spacing="0" transform="translate(-167)" word-spacing="0"><circle cx="395" cy="228" r="220" fill="#fff" stroke="#000" stroke-width="16"/><path fill="#856800" fill-rule="evenodd" d="M468 266l-70 37-77-37z"/><path fill="#ffcb15" fill-rule="evenodd" d="M468 266l-70 31-77-31z"/><path d="M360 208a22 21 85 00-2 0 22 21 85 00-19 24 22 21 85 0023 19 22 21 85 0019-23 22 21 85 00-7-14 5 6 0 012 4 5 6 0 01-6 7 5 6 0 01-5-7 5 6 0 016-6 5 6 0 013 1 22 21 85 00-14-5zm71 1a22 21 85 00-2 0 22 21 85 00-19 23 22 21 85 0022 20 22 21 85 0019-24 22 21 85 00-20-19zm10 4a5 6 0 015 6 5 6 0 01-5 6 5 6 0 01-5-6 5 6 0 015-6z"/></g><path fill-rule="evenodd" d="M262 58c-4 9-12 19-19 24 1-8 2-16 1-22-4 8-12 18-20 24 2-7 2-15 1-21-7 13-15 24-29 28-70 20-131 113-152 213 11 28 29 53 51 73 8-158 45-267 112-208 10 9 16 13 20 13 5 0 10-4 21-13 67-59 105 50 112 208 22-20 40-45 51-73-20-95-77-184-144-209l-10-4c4-8 7-23 5-33z"/></svg>
+  </div>
+  <div class="logo_font">
+    <div class="logo_font_dark">
+    <svg xmlns="http://www.w3.org/2000/svg" class="logo_font_dark" viewBox="0 0 786.1 139.2"><defs/><path fill="#fff" d="M734.2.1v139h12V73.3l7.3-.3 19.2 66.2 13.4-.1L765 69.4c7.8-4.8 14.7-12 14.4-35.5C779.1 10.2 764.9.2 749.2.1zm-200 .5l-11.4.1v138h11.4v-101l28.3 101v.4h11.3V1.1h-11.2v51.8l-.1-.1V102L534.2 1V.8zm116 0v138h31.6v-10.7l-20.2.1V0h-11.4zm-171 .1v138h31.7V128h-20.2V72.3h18.8V61.7h-18.8V11.1h20.2V.4h-31.7zm109 0v138h13.9c14.8 0 24.7-7.5 29.5-22.5 2.8-8.9 4.2-24.4 4.2-46.7 0-22.2-1.4-37.8-4.2-46.6C626.8 7.9 616.9.4 602.1.4h-13.9zm103 0v138h31.7V128h-20.4V72.3h19V61.7h-19V11.1h20.3V.4h-31.6zm54 9.8c16.5 0 20.6 7.9 20.6 23.3 0 15.5-1 28-20.6 28zm-146 .9h1.2c10.5 0 17.4 6.2 20.6 18.5a176 176 0 013.1 40c0 19.2-1 32.5-3.1 39.9-3.2 12.3-10 18.5-20.6 18.5h-1.2v-117z" color="#000" style="font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal"/><path fill="#9f9f9f" d="M406.2.1a23.8 23.8 0 00-11.3 3.3 22.4 22.4 0 00-9 12.2 42 42 0 00.7 30.2 68.6 68.6 0 0011.7 18.4 2360 2360 0 019.4 11c10.6 12.3 14.7 23 13.3 34.8-1.1 8.5-4.2 14-9.7 17.3-4.1 2.4-10.3 2-15.3.2a44.7 44.7 0 01-10.9-9l-5.3 7.4a15 15 0 002.5 3.6c2.8 3.2 8 6.9 11.8 8.2l.2.3a52.7 52.7 0 0020 0c9-3.5 14.6-11.7 16.2-24 1-6.6 1-11 0-16.6-1.9-12.4-5.8-19.5-18.8-34.7-13.5-15.5-16.9-21.1-18-29.5-1.3-9.7 1.9-18 7.9-21.4 4.4-2.3 8.5-1.3 12.9.7a28 28 0 014.4 3.2l1.6 1.3c.6 0 3.9-8 4.4-8.8A23.8 23.8 0 00406.2.1zm-302 .2l-20.9 138h11.4l6-45.8H120l6 45.8h11.4L116.5.3zm78 0h-39.4v10.8h14.8v128H169v-128h28.1v128h11.4v-128h14.9V.3zm46.3 0v138H240V72h28.4v66.4h11.2V.4L268.3.3v61.5h-28.4V.3zm66.1 0v138H306V.3zm47.4 0l-21 138h11.4l5.9-45.8h19.4l5.9 45.9H375L354.2.4H342zM0 .7v138h11.4v-117c6.6 12.7 13.8 26 19.7 36.8l5.7 10 5.7-10 19.7-36.6v117h11.2V.9H62.2L40.7 40.7l-4 7.4c-9-17-17.3-32-25.4-47.2L0 .8zm110 18.7l8.5 64.3h-17zm238 0l8.4 64.4h-16.9l8.5-64.3z"/></svg>
+    </div>
+    <div class="logo_font_light">
+    <svg xmlns="http://www.w3.org/2000/svg" class="logo_font_light" viewBox="0 0 786.1 139.2"><defs/><path fill="#030303" style="font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal" d="M734.2.1v139h12V73.3l7.3-.3 19.2 66.2 13.4-.1L765 69.4c7.8-4.8 14.7-12 14.4-35.5C779.1 10.2 764.9.2 749.2.1zm-200 .5l-11.4.1v138h11.4v-101l28.3 101v.4h11.3V1.1h-11.2v51.8l-.1-.1V102L534.2 1V.8zm116 0v138h31.6v-10.7l-20.2.1V0h-11.4zm-171 .1v138h31.7V128h-20.2V72.3h18.8V61.7h-18.8V11.1h20.2V.4h-31.7zm109 0v138h13.9c14.8 0 24.7-7.5 29.5-22.5 2.8-8.9 4.2-24.4 4.2-46.7 0-22.2-1.4-37.8-4.2-46.6C626.8 7.9 616.9.4 602.1.4h-13.9zm103 0v138h31.7V128h-20.4V72.3h19V61.7h-19V11.1h20.3V.4h-31.6zm54 9.8c16.5 0 20.6 7.9 20.6 23.3 0 15.5-1 28-20.6 28zm-146 .9h1.2c10.5 0 17.4 6.2 20.6 18.5a176 176 0 013.1 40c0 19.2-1 32.5-3.1 39.9-3.2 12.3-10 18.5-20.6 18.5h-1.2v-117z" color="#000"/><path fill="#9f9f9f" d="M406.2.1a23.8 23.8 0 00-11.3 3.3 22.4 22.4 0 00-9 12.2 42 42 0 00.7 30.2 68.6 68.6 0 0011.7 18.4 2360 2360 0 019.4 11c10.6 12.3 14.7 23 13.3 34.8-1.1 8.5-4.2 14-9.7 17.3-4.1 2.4-10.3 2-15.3.2a44.7 44.7 0 01-10.9-9l-5.3 7.4a15 15 0 002.5 3.6c2.8 3.2 8 6.9 11.8 8.2l.2.3a52.7 52.7 0 0020 0c9-3.5 14.6-11.7 16.2-24 1-6.6 1-11 0-16.6-1.9-12.4-5.8-19.5-18.8-34.7-13.5-15.5-16.9-21.1-18-29.5-1.3-9.7 1.9-18 7.9-21.4 4.4-2.3 8.5-1.3 12.9.7a28 28 0 014.4 3.2l1.6 1.3c.6 0 3.9-8 4.4-8.8A23.8 23.8 0 00406.2.1zm-302 .2l-20.9 138h11.4l6-45.8H120l6 45.8h11.4L116.5.3zm78 0h-39.4v10.8h14.8v128H169v-128h28.1v128h11.4v-128h14.9V.3zm46.3 0v138H240V72h28.4v66.4h11.2V.4L268.3.3v61.5h-28.4V.3zm66.1 0v138H306V.3zm47.4 0l-21 138h11.4l5.9-45.8h19.4l5.9 45.9H375L354.2.4H342zM0 .7v138h11.4v-117c6.6 12.7 13.8 26 19.7 36.8l5.7 10 5.7-10 19.7-36.6v117h11.2V.9H62.2L40.7 40.7l-4 7.4c-9-17-17.3-32-25.4-47.2L0 .8zm110 18.7l8.5 64.3h-17zm238 0l8.4 64.4h-16.9l8.5-64.3z"/></svg>
+    </div>
+  </div>
+</a>
+
+        <p class="bio">
+          <span>
+            Backend engineer at trivago, open-source maintainer, speaker.
+          </span>
+          <a href="/about">About me.</a>
+        </p>
+        
+
+
+
+
+
+<nav>
+    <ul>
+        <li>
+            <a class="icon" href="/" title="Go to homepage" aria-label="Go to homepage">
+                <svg xmlns='http://www.w3.org/2000/svg' version='1' viewBox='0 0 61 58'><path stroke='#fff' stroke-linecap='square' stroke-width='.52916' d='M7 21v36h16V38h15v19h15V21z'/><path d='M61 26H0l15-13L30 0l15 13z'/></svg>
+            </a>
+        </li>
+        <li>
+            <a class="icon" href="https://github.com/mre" title="My Github profile" aria-label="My Github profile">
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 578.3 578.3'><path d='M533 160c1-26-5-53-10-79-1-9-5-18-8-27-2-6-10-10-16-9l-12 3c-39 13-76 32-111 54-5 3-11 4-17 3l-41-5c-33-1-67 0-100 6-5 1-11 0-15-3-38-24-77-46-122-57-7-2-14-1-15 1l-3 6c-5 16-10 33-13 51-4 20-7 42-5 62 1 13-3 21-10 30-24 31-34 66-35 104-1 33 4 65 14 97 15 48 45 84 90 108 36 19 76 27 117 28h111c37 1 73-3 109-14 35-12 66-30 90-60 34-42 45-92 47-145 2-40-6-78-30-111a65 65 0 01-15-43zm-71 310c-16 13-35 20-55 25-39 9-79 11-119 10-39 1-78-1-116-10-28-7-54-18-72-42-29-39-36-112 11-152 12-11 26-17 41-18l53-3 133 3c20 0 40-5 60-4 18 2 38 5 54 12 28 12 42 37 47 66 7 43-2 83-37 113z'/><ellipse cx='390' cy='385.6' rx='42.1' ry='56.3'/><ellipse cx='189' cy='385.6' rx='42.1' ry='56.3'/></svg>
+            </a>
+        </li>
+        <li>
+            <a class="icon" href="https://twitter.com/matthiasendler" title="My Twitter profile"
+                aria-label="My Twitter profile">
+                <svg xmlns='http://www.w3.org/2000/svg' version='1' viewBox='0 0 612 612'><path fill='#010002' d='M612 116c-23 10-47 17-72 20 26-15 46-40 55-69-24 14-51 24-80 30a125 125 0 0 0-217 86c0 10 1 19 3 29-104-6-196-56-258-132a125 125 0 0 0 39 168c-21-1-40-6-57-16v2c0 61 43 111 100 123a127 127 0 0 1-56 2c16 50 62 86 117 87A252 252 0 0 1 0 498a355 355 0 0 0 550-301l-1-16c25-17 46-40 63-65z'/></svg> 
+            </a>
+        </li>
+        <li>
+            <a class="icon" href="https://feedly.com/i/subscription/feed/https%3A%2F%2Fendler.dev%2Frss.xml" title="My RSS feed"
+                aria-label="My RSS feed"><svg xmlns='http://www.w3.org/2000/svg' version='1' viewBox='0 0 1280 1280'><path d='M264 224l-1 79v79h8a660 660 0 0 1 438 174 665 665 0 0 1 218 492h156l1-26a820 820 0 0 0-715-792c-37-5-103-9-105-6z'/><path d='M263 504l-1 78 1 79 14 2a383 383 0 0 1 369 368l1 17h158v-19a536 536 0 0 0-98-293 546 546 0 0 0-444-232zM353 830a110 110 0 0 0-77 160 110 110 0 1 0 188-114c-5-7-23-25-30-29-25-16-54-22-81-17z'/></svg></a>
+        </li>
+        <li>
+            <a class="searchicon icon" href="#searchbox" title="Search"
+                aria-label="Search through articles">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.1 90.1"><defs/><path d="M71.8 62.6a39.6 39.6 0 10-9.2 9.2L79 88.2a6.5 6.5 0 009.2-9.2zM13 39.6a26.5 26.5 0 1126.5 26.5 26.5 26.5 0 01-26.5-26.5z"/></svg>
+            </a>
+        </li>
+    </ul>
+</nav> 
+<script defer type="module">async function lazyLoad(){await init("/tinysearch_engine_bg.wasm")}var loaded=!1;function autocomplete(e){var t;function n(e){if(!e)return!1;!function(e){for(var t=0;t<e.length;t++)e[t].classList.remove("autocomplete-active")}(e),t>=e.length&&(t=0),t<0&&(t=e.length-1),e[t].classList.add("autocomplete-active")}function a(t){for(var n=document.getElementsByClassName("autocomplete-items"),a=0;a<n.length;a++)t!=n[a]&&t!=e&&n[a].parentNode.removeChild(n[a])}e.addEventListener("click",(function(e){loaded||(lazyLoad(),loaded=!0)})),e.addEventListener("input",(function(e){var n,o,i,c=this.value;if(a(),!c)return!1;t=-1,(n=document.createElement("DIV")).setAttribute("id",this.id+"autocomplete-list"),n.setAttribute("class","autocomplete-items"),this.parentNode.appendChild(n);let r=search(c,3);for(i=0;i<r.length;i++){let e=r[i];(o=document.createElement("DIV")).innerHTML=e[0],o.addEventListener("click",(function(t){window.location.href=`${e[1]}?q=${encodeURIComponent(c)}`})),n.appendChild(o)}})),e.addEventListener("keydown",(function(e){var a=document.getElementById(this.id+"autocomplete-list");a&&(a=a.getElementsByTagName("div")),40==e.keyCode?(t++,n(a)):38==e.keyCode?(t--,n(a)):13==e.keyCode&&(e.preventDefault(),t>-1&&a&&a[t].click())})),document.addEventListener("click",(function(e){a(e.target)}))}let wasm;autocomplete(document.getElementById("tinysearch"));let WASM_VECTOR_LEN=0,cachedTextEncoder=new TextEncoder("utf-8");const encodeString="function"==typeof cachedTextEncoder.encodeInto?function(e,t){return cachedTextEncoder.encodeInto(e,t)}:function(e,t){const n=cachedTextEncoder.encode(e);return t.set(n),{read:e.length,written:n.length}};let cachegetUint8Memory=null;function getUint8Memory(){return null!==cachegetUint8Memory&&cachegetUint8Memory.buffer===wasm.memory.buffer||(cachegetUint8Memory=new Uint8Array(wasm.memory.buffer)),cachegetUint8Memory}function passStringToWasm(e){let t=e.length,n=wasm.__wbindgen_malloc(t);const a=getUint8Memory();let o=0;for(;o<t;o++){const t=e.charCodeAt(o);if(t>127)break;a[n+o]=t}if(o!==t){0!==o&&(e=e.slice(o)),n=wasm.__wbindgen_realloc(n,t,t=o+3*e.length);const a=getUint8Memory().subarray(n+o,n+t);o+=encodeString(e,a).written}return WASM_VECTOR_LEN=o,n}const heap=new Array(32);function getObject(e){return heap[e]}heap.fill(void 0),heap.push(void 0,null,!0,!1);let heap_next=heap.length;function dropObject(e){e<36||(heap[e]=heap_next,heap_next=e)}function takeObject(e){const t=getObject(e);return dropObject(e),t}export function search(e,t){return takeObject(wasm.search(passStringToWasm(e),WASM_VECTOR_LEN,t))}let cachedTextDecoder=new TextDecoder("utf-8",{ignoreBOM:!0,fatal:!0});function getStringFromWasm(e,t){return cachedTextDecoder.decode(getUint8Memory().subarray(e,e+t))}function addHeapObject(e){heap_next===heap.length&&heap.push(heap.length+1);const t=heap_next;return heap_next=heap[t],heap[t]=e,t}function init(e){let t;void 0===e&&(e=import.meta.url.replace(/\.js$/,"_bg.wasm"));const n={wbg:{}};if(n.wbg.__wbindgen_json_parse=function(e,t){return addHeapObject(JSON.parse(getStringFromWasm(e,t)))},"function"==typeof URL&&e instanceof URL||"string"==typeof e||"function"==typeof Request&&e instanceof Request){const a=fetch(e);t="function"==typeof WebAssembly.instantiateStreaming?WebAssembly.instantiateStreaming(a,n).catch(e=>a.then(t=>{if("application/wasm"!=t.headers.get("Content-Type"))return console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n",e),t.arrayBuffer();throw e}).then(e=>WebAssembly.instantiate(e,n))):a.then(e=>e.arrayBuffer()).then(e=>WebAssembly.instantiate(e,n))}else t=WebAssembly.instantiate(e,n).then(t=>t instanceof WebAssembly.Instance?{instance:t,module:e}:t);return t.then(({instance:e,module:t})=>(wasm=e.exports,init.__wbindgen_wasm_module=t,wasm))}export default init;</script>
+<form id="searchbox" autocomplete="off">
+    <div class="autocomplete">
+        <input id="tinysearch" type="text" aria-label="Search through articles" placeholder="&#x1F50D; Search">
+        </label>
+    </div>
+</form>
+      </header>
+
+      <main>
+        
+<article>
+  <p class='post-meta'>Published on 
+
+
+
+
+15th of September, 2017
+</p>
+  <h1>Go vs Rust? Choose Go.</h1>
+  
+  <figure>
+        <img src=".&#x2F;hero.svg"  />
+    <figcaption>
+        <br />
+        Gopher designed with <a href="https://gopherize.me">Gopherize.me</a>. Cogwheels designed by <a href="http://www.freepik.com/free-vector/gear-background-with-pieces-in-different-colors_966124.htm">Freepik</a>
+    </figcaption>
+</figure>
+<p>&quot;Rust or Go, which one should I choose?&quot; is a question I get quite often.
+Both languages seem to be competing for the same user base and they both seem to be
+<em>systems programming</em> languages, so there must be a clear winner, right?</p>
+<p><strong>tl;dr</strong>: <em>It's not so easy. Both languages have a different scope. Golang shines for writing microservices and for typical &quot;DevOps&quot; tasks, but it is not a systems programming language. Rust is stronger for tasks where concurrency, safety and/or performance are important; but it has a steeper learning curve than Go.</em></p>
+<h2 id="go-practical-pragmatic-plain">Go: practical, pragmatic, plain</h2>
+<img src="./go.png" alt="The Golang learning curve over time, a straight line."/>
+<p>I don't think Go is an elegant language. Its biggest feature is simplicity.
+Go is not even a systems programming language. While it's great for writing microservices and tooling around backend infrastructure, I would not want to write a kernel or a memory allocator with it.</p>
+<p>But with Go, you <em>get things done</em> — fast.<br />
+Go is one of the most productive languages I've ever worked with.
+The mantra is: solve real problems today.</p>
+<h2 id="rust-s-strong-guarantees-come-at-a-cost">Rust's strong guarantees come at a cost</h2>
+<img src="./rust.png" alt="The Rust learning curve over time, a bumpy ride."/>
+<p>Rust in comparison is <strong>hard</strong>. It took me many months to become somewhat productive.
+You need to invest a serious amount of time to see any benefit.
+Rust is already a powerful language and it gets stronger every day.
+It feels much more like a <em>pragmatic Haskell</em> to me than a <em>safer C</em>.</p>
+<p>Don't get me wrong: <a href="https://www.youtube.com/channel/UCZ_EWaQZCZuGGfnuqUoHujw">I love Rust</a>, and it helped me become a better programmer. It is certainly a nice language to learn. The big question is, if it is the right choice for your next major project.</p>
+<p>Here's the thing: if you choose Rust, usually you need the guarantees, that the language provides:</p>
+<ul>
+<li>Safety against <code>Null</code> pointers, race conditions and all sorts of low-level threats.</li>
+<li>Predictable runtime behavior (zero cost abstractions and no garbage collector).</li>
+<li>(Almost) total control over the hardware (memory layout, processor features).</li>
+<li>Seamless interoperability with other languages.</li>
+</ul>
+<p>If you don't <em>require</em> any of these features, Rust might be a poor choice for your next project.
+That's because these guarantees come with a cost: ramp-up time.
+You'll need to unlearn bad habits and learn new concepts.
+Chances are, you will <a href="https://m-decoster.github.io/2017/01/16/fighting-borrowchk/">fight with the borrow checker</a> a lot when you start out.</p>
+<h2 id="case-study-primality-by-trial-division">Case-study: Primality by trial division</h2>
+<p>Let's say, you want to check if a number is <a href="https://en.wikipedia.org/wiki/Prime_number">prime</a>.
+The easiest way is to check if we can divide the number by any smaller natural number (without a remainder). If not, we found a prime number! This approach is called <a href="https://en.wikipedia.org/wiki/Trial_division">trial division</a>.</p>
+<p>Here's how to do that in Golang (courtesy of <a href="https://rosettacode.org/wiki/Primality_by_trial_division#Go">Rosetta Code</a>):</p>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">func </span><span style="color:#f29718;">IsPrime</span><span style="color:#61676c;">(</span><span style="color:#ff8f40;">n </span><span style="color:#fa6e32;">int</span><span style="color:#61676c;">) </span><span style="color:#fa6e32;">bool </span><span style="color:#61676c;">{
+	</span><span style="color:#fa6e32;">if</span><span style="color:#61676c;"> n </span><span style="color:#ed9366;">&lt; </span><span style="color:#ff8f40;">0 </span><span style="color:#61676c;">{
+		n </span><span style="color:#ed9366;">= -</span><span style="color:#61676c;">n
+	}
+	</span><span style="color:#fa6e32;">switch </span><span style="color:#61676c;">{
+	</span><span style="color:#fa6e32;">case</span><span style="color:#61676c;"> n </span><span style="color:#ed9366;">&lt; </span><span style="color:#ff8f40;">2</span><span style="color:#61676ccc;">:
+		</span><span style="color:#fa6e32;">return </span><span style="color:#ff8f40;">false
+	</span><span style="color:#fa6e32;">default</span><span style="color:#61676ccc;">:
+		</span><span style="color:#fa6e32;">for </span><span style="color:#61676c;">i </span><span style="color:#ed9366;">:= </span><span style="color:#ff8f40;">2</span><span style="color:#61676c;">; i </span><span style="color:#ed9366;">&lt;</span><span style="color:#61676c;"> n; i</span><span style="color:#ed9366;">++ </span><span style="color:#61676c;">{
+			</span><span style="color:#fa6e32;">if</span><span style="color:#61676c;"> n</span><span style="color:#ed9366;">%</span><span style="color:#61676c;">i </span><span style="color:#ed9366;">== </span><span style="color:#ff8f40;">0 </span><span style="color:#61676c;">{
+				</span><span style="color:#fa6e32;">return </span><span style="color:#ff8f40;">false
+			</span><span style="color:#61676c;">}
+		}
+	}
+	</span><span style="color:#fa6e32;">return </span><span style="color:#ff8f40;">true
+</span><span style="color:#61676c;">}
+</span></pre>
+<p>And here's the same thing in Rust:</p>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">pub fn </span><span style="color:#f29718;">is_prime</span><span style="color:#61676c;">(</span><span style="color:#ff8f40;">n</span><span style="color:#61676ccc;">: </span><span style="color:#fa6e32;">u64</span><span style="color:#61676c;">) </span><span style="color:#61676ccc;">-&gt; </span><span style="color:#fa6e32;">bool </span><span style="color:#61676c;">{
+    </span><span style="color:#fa6e32;">match</span><span style="color:#61676c;"> n {
+        </span><span style="color:#ff8f40;">0</span><span style="color:#ed9366;">...</span><span style="color:#ff8f40;">1 </span><span style="color:#ed9366;">=&gt; </span><span style="color:#ff8f40;">false</span><span style="color:#61676ccc;">,
+        </span><span style="color:#ed9366;">_ =&gt; </span><span style="color:#61676c;">{
+            </span><span style="color:#fa6e32;">for</span><span style="color:#61676c;"> d </span><span style="color:#ed9366;">in </span><span style="color:#ff8f40;">2</span><span style="color:#ed9366;">..</span><span style="color:#61676c;">n {
+                </span><span style="color:#fa6e32;">if</span><span style="color:#61676c;"> n </span><span style="color:#ed9366;">%</span><span style="color:#61676c;"> d </span><span style="color:#ed9366;">== </span><span style="color:#ff8f40;">0 </span><span style="color:#61676c;">{
+                    </span><span style="color:#fa6e32;">return </span><span style="color:#ff8f40;">false</span><span style="color:#61676ccc;">;
+                </span><span style="color:#61676c;">}
+            }
+            </span><span style="color:#ff8f40;">true
+        </span><span style="color:#61676c;">}
+    }
+}
+</span></pre>
+<p>At first sight, both solutions look pretty similar.
+But if we look closer, we can spot some differences.</p>
+<ul>
+<li>In Go, we use a simple switch-case statement. In Rust, we use a <a href="https://doc.rust-lang.org/1.2.0/book/match.html"><code>match</code></a> statement, which is much more powerful.</li>
+<li>In Go, we use a simple for-loop to iterate over the numbers 2 to n. In Rust, we use a range expression (<code>2..n</code>).</li>
+<li>In Go, we use two <code>return</code> statements, in Rust we have one <code>return</code> <em>expression</em>. In general, most things in Rust are expressions, which can be returned and assigned to a variable. Read more about expressions <a href="https://doc.rust-lang.org/beta/reference/expressions.html">here</a>.</li>
+</ul>
+<p>In many areas, Rust is more functional than Golang. You could rewrite the above code using the <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.any"><code>any</code></a> method, which is implemented for <code>Range</code>.</p>
+<pre style="background-color:#fafafa;">
+<span style="color:#fa6e32;">fn </span><span style="color:#f29718;">is_prime</span><span style="color:#61676c;">(</span><span style="color:#ff8f40;">n</span><span style="color:#61676ccc;">: </span><span style="color:#fa6e32;">u64</span><span style="color:#61676c;">) </span><span style="color:#61676ccc;">-&gt; </span><span style="color:#fa6e32;">bool </span><span style="color:#61676c;">{
+    </span><span style="color:#fa6e32;">match</span><span style="color:#61676c;"> n {
+        </span><span style="color:#ff8f40;">0</span><span style="color:#ed9366;">...</span><span style="color:#ff8f40;">1 </span><span style="color:#ed9366;">=&gt; </span><span style="color:#ff8f40;">false</span><span style="color:#61676ccc;">,
+        </span><span style="color:#ed9366;">_ =&gt; !</span><span style="color:#61676c;">(</span><span style="color:#ff8f40;">2</span><span style="color:#ed9366;">..</span><span style="color:#61676c;">n)</span><span style="color:#ed9366;">.</span><span style="color:#f07171;">any</span><span style="color:#61676c;">(|</span><span style="color:#ff8f40;">d</span><span style="color:#61676c;">| n </span><span style="color:#ed9366;">%</span><span style="color:#61676c;"> d </span><span style="color:#ed9366;">== </span><span style="color:#ff8f40;">0</span><span style="color:#61676c;">)</span><span style="color:#61676ccc;">,
+    </span><span style="color:#61676c;">}
+}
+</span></pre>
+<p>It might seem a little alien at first, but it will become second-nature after a while.</p>
+<p>This was just a quick example, of course. I suggest, you browse some code on <a href="http://rosettacode.org/">Rosetta Code</a> to get a better feeling for both languages.</p>
+<h2 id="case-study-finding-duplicate-words-in-text-files">Case study: Finding duplicate words in text files</h2>
+<p>If you're more like a visual type, here is a video where I write a simple
+concurrent program in Go and Rust to compare both languages:</p>
+<link rel="stylesheet" href="https:&#x2F;&#x2F;endler.dev&#x2F;video.css" />
+<script src="/video.js"></script>
+<div class="light-video-embed" data-id="B5xYBrxVSiE">
+  <img src="preview.jpg" />
+  <div class="play"></div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    lightEmbedInit();
+  });
+</script>
+<h2 id="some-things-i-prefer-in-go">Some things I prefer in Go</h2>
+<ul>
+<li>Fast compile times</li>
+<li>Pragmatic problem-solving approach</li>
+<li>Nice ecosystem for typical <em>DevOps</em> tasks</li>
+<li>Batteries-included standard-library</li>
+<li>IDE support</li>
+<li>Simple error handling</li>
+<li>The mascot 😉</li>
+</ul>
+<h2 id="some-things-i-prefer-in-rust">Some things I prefer in Rust</h2>
+<ul>
+<li>Safety: No null pointers, no data races,...</li>
+<li>Fine-grained system control</li>
+<li>Incredible runtime speed (comparable with C/C++)</li>
+<li>Zero-cost abstractions</li>
+<li>Awesome, open-minded community</li>
+<li>Simple package management with cargo</li>
+<li>Support for Generics in form of traits</li>
+<li>C interop and FFI</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>99% of the time, Go is &quot;good enough&quot; and that 1% where it isn't, you'll know.
+And then take a look at Rust, because the two languages complement each other pretty well.</p>
+<p>After all is said and done, <a href="https://dave.cheney.net/2015/07/02/why-go-and-rust-are-not-competitors">Rust and Go are not really competitors</a>.</p>
+
+
+  <ul class='post-links'>
+    <li>
+    💡Found an error? Please <a href="https://github.com/mre/mre.github.io/edit/source/content/2017&#x2F;go-vs-rust&#x2F;index.md">propose a change</a> on Github.
+    </li>
+    
+    <li>
+      
+💬 Comments on
+
+<a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=15266066">Hacker News</a>,
+
+<a href="https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;golang&#x2F;comments&#x2F;70iwcd&#x2F;go_vs_rust_choose_go&#x2F;">Reddit</a>.
+
+
+    </li>
+    
+    
+  </ul>
+</article>
+
+      </main>
+      <img
+        alt="Page view statistics"
+        style="display:none"
+        src="https://ping.endler.dev/x.gif"
+      />
+    </div>
+    
+
+<section id="teaser">
+    <div class="body">
+        <h2><a href="https:&#x2F;&#x2F;endler.dev&#x2F;2017&#x2F;makefiles&#x2F;">Afraid of Makefiles? Don&#x27;t be!</a></h2>
+        <p>
+        
+    
+        What do clothes have to do with Makefiles? Find out in this post.
+        
+        Illustration by Anindyanfitri - Freepik.com
+    
+
+In the last few years, I've had the pleasure to work with a lot of talented Software Engineers.
+One thing that struck me is, that many of them d… <a
+                href="https:&#x2F;&#x2F;endler.dev&#x2F;2017&#x2F;makefiles&#x2F;">Continue
+                reading</a></p>
+    </div>
+</section>
+
+ <footer>
+    <div class="body">
+        <div>
+            <h2><a href="/about">About me</a></h2>
+            <p>
+                I'm a Backend Engineer running <i><a href="http://hello-rust.show/">Hello, Rust!</a></i>, a YouTube
+                channel about the Rust
+                programming language.
+                On this blog, you'll mostly find articles about programming in
+                <a href="/2017/yes/">Rust</a> and <a href="/2018/go-io-testing/">Golang</a> or developer tools like <a
+                    href="/2017/makefiles/">make</a> and <a href="/2018/ten-years-of-vim/">Vim</a>. We should hang out
+                some
+                time.
+                It'll be great.<br />
+            </p>
+        </div>
+
+
+        <div>
+            <h2><a href="https://github.com/sponsors/mre/">Support</a></h2>
+            <p>
+                Creating and maintaining this blog and my projects is a lot of
+                work. By supporting me, you allow me to invest more time in new
+                content, new features, and continuous maintenance. The best way
+                to support me is to <a href="https://github.com/sponsors/mre/">sponsor me on GitHub</a>.
+                GitHub will even match sponsorships until October 2020!
+                Alternatively, I also have <a
+                href="https://www.patreon.com/hellorust">Patreon</a> account. Thank you! ❤️
+            </p>
+        </div>
+
+
+        <div>
+            <form action="https://tinyletter.com/mre" method="post" target="popupwindow"
+                onsubmit="window.open('https://tinyletter.com/mre', 'popupwindow', 'scrollbars=yes,width=800,height=600'); return true">
+                <p><label for="tlemail">Wow! I also have a newsletter for new articles:</label></p>
+                <p>
+                    <input class="field email" type="email" name="email" id="tlemail" placeholder="E-Mail Address" />
+                    <input type="hidden" value="1" name="embed" /><input class="field submit" type="submit"
+                        value="Subscribe" />
+                </p>
+            </form>
+            <p>
+                <a href="https://twitter.com/matthiasendler">Twitter</a> is also fine.
+            </p>
+        </div>
+    </div>
+</footer> 
+  </body>
+</html>
